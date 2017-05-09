@@ -1,3 +1,4 @@
+import { CommonModule } from './common/common.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -55,7 +56,8 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: NoPreloading })
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: NoPreloading }),
+    CommonModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
