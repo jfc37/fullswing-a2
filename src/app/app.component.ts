@@ -1,3 +1,4 @@
+import { AuthenticationService } from './common';
 /*
  * Angular 2 decorators and services
  */
@@ -30,18 +31,20 @@ import { AppState } from './app.service';
       </a>
     </nav>
 
+    <button (click)="logout()">Log out</button>    
+
     <main>
       <router-outlet></router-outlet>
     </main>
   `
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   constructor(
-    public appState: AppState
+    private _authService: AuthenticationService
   ) {}
 
-  public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+  public logout() {
+    this._authService.logout();
   }
 
 }

@@ -1,3 +1,4 @@
+import { AuthenticationService } from '../../../common';
 import { Component, OnInit } from '@angular/core';
 
 /**
@@ -10,6 +11,12 @@ import { Component, OnInit } from '@angular/core';
         <fs-login-form></fs-login-form>
     `
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+    constructor(private _authService: AuthenticationService) {
 
+    }
+
+    public ngOnInit() {
+        this._authService.login();
+    }
 }
