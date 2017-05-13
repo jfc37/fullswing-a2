@@ -6,6 +6,7 @@ import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import * as user from './user.actions';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class UserEffects {
@@ -16,8 +17,8 @@ export class UserEffects {
         .startWith(new CheckLoginStatusAction())
         .map(() => {
             const idToken = localStorage.getItem('id_token');
-            console.error(idToken);
-            if (idToken) {
+            const hasValidIdToken = idToken && tokenNotExpired(null, idToken);
+            if (hasValidIdToken) {
               return new LoggedInAction({idToken});
             } else {
               return new LoggedOutAction();

@@ -25,9 +25,8 @@ export function userReducer(state = initialState, action: user.Actions): UserSta
         }
 
         case user.LOGGED_OUT: {
-            return Object.assign({}, state, {
-                isLoading: false,
-                isLoggedIn: false
+            return Object.assign({}, state, initialState, {
+                isLoading: false
             });
         }
 
