@@ -3,7 +3,7 @@ import * as user from './user.actions';
 
 export const initialState: UserState = {
     isLoggedIn: false,
-    isLoading: false,
+    isLoading: true,
     errors: []
 };
 
@@ -19,6 +19,13 @@ export function userReducer(state = initialState, action: user.Actions): UserSta
             return Object.assign({}, state, {
                 isLoading: false,
                 isLoggedIn: true
+            });
+        }
+
+        case user.LOGGED_OUT: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                isLoggedIn: false
             });
         }
 

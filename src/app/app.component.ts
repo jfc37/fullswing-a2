@@ -25,17 +25,14 @@ import {
   ],
   template: `
     <nav>
-      <a [routerLink]=" ['./login'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Login
-      </a>
       <a [routerLink]=" ['./dashboard'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
         Dashboard
       </a>
+      <a (click)="logout()">
+        Log out
+      </a>
     </nav>
-
-    <button (click)="logout()">Log out</button>    
     
     <pre>{{user$ | async | json}}</pre>
     

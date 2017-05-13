@@ -1,3 +1,4 @@
+import { LoggedOutAction, LoginSuccessAction } from '../../services/redux/user/user.actions';
 import { UserState } from '../../services/redux/user/user-state.model';
 import { AppState } from '../../services/redux/app/app-state.model';
 import { Observable } from 'rxjs/Rx';
@@ -22,10 +23,17 @@ export class AuthenticationService {
     private _store: Store<UserState>) {
     // Add callback for lock `authenticated` event
     this._lock.on('authenticated', (authResult) => {
+      this._store.dispatch(new LoginSuccessAction());
       localStorage.setItem('id_token', authResult.idToken);
       this._router.navigate(['/dashboard']);
       this._lock.hide();
     });
+
+    if (localStorage.getItem('id_token')) {
+      this._store.dispatch(new LoginSuccessAction());
+    } else {
+      this._store.dispatch(new LoggedOutAction());
+    }
   }
 
   public login() {
@@ -34,11 +42,14 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): Observable<boolean> {
-    return this._store.select(user => user.isLoggedIn);
+    return this._store.select(user => user)
+      .filter(user => !user.isLoading)
+      .map(user => user.isLoggedIn);
   }
 
   public logout() {
     localStorage.removeItem('id_token');
     this._router.navigate(['/login']);
+    this._store.dispatch(new LoggedOutAction());
   }
 }
