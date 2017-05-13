@@ -4,21 +4,23 @@ import * as user from './user.actions';
 export const initialState: UserState = {
     isLoggedIn: false,
     isLoading: true,
+    idToken: null,
     errors: []
 };
 
 export function userReducer(state = initialState, action: user.Actions): UserState {
     switch (action.type) {
-        case user.LOGIN: {
+        case user.CHECK_LOGIN_STATUS: {
             return Object.assign({}, state, {
                 isLoading: true
             });
         }
 
-        case user.LOGIN_SUCCESS: {
+        case user.LOGGED_IN: {
             return Object.assign({}, state, {
                 isLoading: false,
-                isLoggedIn: true
+                isLoggedIn: true,
+                idToken: action.payload.idToken
             });
         }
 

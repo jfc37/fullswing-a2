@@ -1,15 +1,19 @@
 import { Action } from '@ngrx/store';
 
-export const LOGIN = '[User] Login';
-export const LOGIN_SUCCESS = '[User] Login Success';
-export const LOGGED_OUT = '[User] Login Out';
+export const CHECK_LOGIN_STATUS = '[User] Check Login Status';
+export const LOGGED_IN = '[User] Logged In';
+export const LOGGED_OUT = '[User] Logged Out';
 
-export class LoginAction implements Action {
-    public readonly type = LOGIN;
+export class CheckLoginStatusAction implements Action {
+    public readonly type = CHECK_LOGIN_STATUS;
 }
 
-export class LoginSuccessAction implements Action {
-    public readonly type = LOGIN_SUCCESS;
+export class LoggedInAction implements Action {
+    public readonly type = LOGGED_IN;
+
+    constructor(public payload: {idToken: string}) {
+
+    }
 }
 
 export class LoggedOutAction implements Action {
@@ -17,6 +21,6 @@ export class LoggedOutAction implements Action {
 }
 
 export type Actions
-    = LoginAction
-    | LoginSuccessAction
+    = CheckLoginStatusAction
+    | LoggedInAction
     | LoggedOutAction;
