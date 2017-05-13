@@ -1,4 +1,11 @@
-import { CheckLoginStatusAction, LoggedOutAction, LoggedInAction } from './user.actions';
+import { LockService } from '../../../common/authentication/lock.service';
+import {
+    CheckLoginStatusAction,
+    LoadProfileFailedAction,
+    LoggedInAction,
+    LoggedOutAction,
+    SetProfileAction
+} from './user.actions';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
@@ -29,11 +36,16 @@ export class UserEffects {
     public loggedIn$: Observable<Action> = this.actions$
         .ofType(user.LOGGED_IN)
         .map(action => action.payload)
-        .do((payload) => {
+        .do(payload => {
             localStorage.setItem('id_token', payload.idToken);
             this._router.navigate(['/dashboard']);
         })
-        .switchMap(() => empty());
+        .switchMap(payload => this._lock.getProfile(payload.idToken))
+        .map(payload => ({
+            name: payload.nickname || payload.name || payload.email,
+            role: payload.claims[0].resource}))
+        .map(payload => new SetProfileAction(payload))
+        .catch(error => Observable.of(new LoadProfileFailedAction(error)));
 
     @Effect()
     public loggedOut$: Observable<Action> = this.actions$
@@ -46,5 +58,6 @@ export class UserEffects {
 
     constructor(
         private actions$: Actions,
-        private _router: Router) { }
+        private _router: Router,
+        private _lock: LockService) { }
 }

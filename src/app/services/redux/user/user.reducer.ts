@@ -3,6 +3,8 @@ import * as user from './user.actions';
 
 export const initialState: UserState = {
     isLoggedIn: false,
+    name: null,
+    role: null,
     isLoading: true,
     idToken: null,
     errors: []
@@ -21,6 +23,22 @@ export function userReducer(state = initialState, action: user.Actions): UserSta
                 isLoading: false,
                 isLoggedIn: true,
                 idToken: action.payload.idToken
+            });
+        }
+
+        case user.SET_PROFILE: {
+            return Object.assign({}, state, {
+                name: action.payload.name,
+                role: action.payload.role
+            });
+        }
+
+        case user.LOAD_PROFILE_FAILED: {
+            return Object.assign({}, state, {
+                errors: [
+                    ...state.errors,
+                    action.error
+                ]
             });
         }
 

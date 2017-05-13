@@ -1,3 +1,4 @@
-export {AuthenticationService} from './authentication.service';
+export { AuthenticationService } from './authentication.service';
+export { LockService } from './lock.service';
 
-export {LoggedInGuard} from './logged-in-guard.service';
+export { LoggedInGuard } from './logged-in-guard.service';

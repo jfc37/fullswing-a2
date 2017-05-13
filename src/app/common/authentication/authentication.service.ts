@@ -10,27 +10,8 @@ import Auth0Lock from 'auth0-lock';
 
 @Injectable()
 export class AuthenticationService {
-  // Configure Auth0
-  private _lock = new Auth0Lock('jaLVtw90tXt8tCCBIHIUJLIcP2p2MMdE', 'jfc-dev.au.auth0.com', {
-    auth: {
-      responseType: 'token',
-      redirect: false,
-    }
-  });
+  constructor(private _store: Store<AppState>) {
 
-  constructor(
-    private _router: Router,
-    private _store: Store<AppState>) {
-    // Add callback for lock `authenticated` event
-    this._lock.on('authenticated', (authResult) => {
-      this._store.dispatch(new LoggedInAction(authResult));
-      this._lock.hide();
-    });
-  }
-
-  public login() {
-    // Call the show method to display the widget.
-    this._lock.show();
   }
 
   public isAuthenticated(): Observable<boolean> {
