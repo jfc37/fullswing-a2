@@ -1,9 +1,10 @@
+import { getUserState } from './services/redux/user/user.selectors';
+import { LoggedOutAction } from './services/redux/user/user.actions';
 import { AppState } from './services/redux/app/app-state.model';
 import * as rootReducer from './services/redux/root/root-reducer';
 import { UserState } from './services/redux/user/user-state.model';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { AuthenticationService } from './common';
 /*
  * Angular 2 decorators and services
  */
@@ -44,17 +45,15 @@ import {
 export class AppComponent implements OnInit {
   public user$: Observable<UserState>;
 
-  constructor(
-    private _authService: AuthenticationService,
-    private _store: Store<UserState>
+  constructor(private _store: Store<AppState>
   ) {}
 
   public ngOnInit() {
-    this.user$ = this._store.select(user => user);
+    this.user$ = this._store.select(getUserState);
   }
 
   public logout() {
-    this._authService.logout();
+    this._store.dispatch(new LoggedOutAction());
   }
 
 }

@@ -1,5 +1,4 @@
 import { Store } from '@ngrx/store';
-import { AuthenticationService } from './common/authentication';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   inject,
