@@ -1,3 +1,7 @@
+import * as rootReducer from './services/redux/root/root-reducer';
+import { UserState } from './services/redux/user/user-state.model';
+import { Observable } from 'rxjs/Rx';
+import { Store } from '@ngrx/store';
 import { AuthenticationService } from './common';
 /*
  * Angular 2 decorators and services
@@ -32,16 +36,25 @@ import { AppState } from './app.service';
     </nav>
 
     <button (click)="logout()">Log out</button>    
-
+    
+    <pre>{{user$ | async | json}}</pre>
+    
     <main>
       <router-outlet></router-outlet>
     </main>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  public user$: Observable<UserState>;
+
   constructor(
-    private _authService: AuthenticationService
+    private _authService: AuthenticationService,
+    private _store: Store<UserState>
   ) {}
+
+  public ngOnInit() {
+    this.user$ = this._store.select(user => user);
+  }
 
   public logout() {
     this._authService.logout();

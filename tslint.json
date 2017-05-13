@@ -52,6 +52,10 @@
       "allow-pascal-case",
       "ban-keywords",
       "check-format"
-    ]
+    ],
+    "max-classes-per-file": [
+      false
+    ],
+    "arrow-parens": false
   }
 }
