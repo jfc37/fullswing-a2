@@ -1,3 +1,7 @@
+import { UserState } from '../../services/redux/user/user-state.model';
+import { AppState } from '../../services/redux/app/app-state.model';
+import { Observable } from 'rxjs/Rx';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
@@ -13,7 +17,9 @@ export class AuthenticationService {
     }
   });
 
-  constructor(private _router: Router) {
+  constructor(
+    private _router: Router,
+    private _store: Store<UserState>) {
     // Add callback for lock `authenticated` event
     this._lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
@@ -27,10 +33,8 @@ export class AuthenticationService {
     this._lock.show();
   }
 
-  public isAuthenticated() {
-    // Check if there's an unexpired JWT
-    // This searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired('id_token');
+  public isAuthenticated(): Observable<boolean> {
+    return this._store.select(user => user.isLoggedIn);
   }
 
   public logout() {

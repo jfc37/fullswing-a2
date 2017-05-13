@@ -1,3 +1,4 @@
+import { AppState } from './services/redux/app/app-state.model';
 import * as rootReducer from './services/redux/root/root-reducer';
 import { UserState } from './services/redux/user/user-state.model';
 import { Observable } from 'rxjs/Rx';
@@ -11,7 +12,6 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import { AppState } from './app.service';
 
 /*
  * App Component

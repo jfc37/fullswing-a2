@@ -1,3 +1,4 @@
+import { userReducer } from './services/redux/user/user.reducer';
 import { appReducer } from './services/redux/app/app.reducer';
 import { CommonModule } from './common/common.module';
 import { BrowserModule } from '@angular/platform-browser';
