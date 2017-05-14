@@ -1,3 +1,6 @@
+import { UserEffects } from './services/redux/user/user.effects';
+import { userReducer } from './services/redux/user/user.reducer';
+import { appReducer } from './services/redux/app/app.reducer';
 import { CommonModule } from './common/common.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -31,6 +34,11 @@ import { NoContentComponent } from './no-content';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
+import { StoreModule } from '@ngrx/store';
+import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -57,7 +65,12 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: NoPreloading }),
-    CommonModule
+    CommonModule,
+
+    StoreModule.provideStore(appReducer),
+    RouterStoreModule.connectRouter(),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    EffectsModule.run(UserEffects),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

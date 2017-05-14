@@ -1,4 +1,4 @@
-import { AuthenticationService } from '../../../common';
+import { LockService } from '../../../common/authentication/lock.service';
 import { Component, OnInit } from '@angular/core';
 
 /**
@@ -12,11 +12,11 @@ import { Component, OnInit } from '@angular/core';
     `
 })
 export class LoginComponent implements OnInit {
-    constructor(private _authService: AuthenticationService) {
+    constructor(private _lock: LockService) {
 
     }
 
     public ngOnInit() {
-        this._authService.login();
+        this._lock.displayLock();
     }
 }
