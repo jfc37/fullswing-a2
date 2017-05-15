@@ -30,6 +30,10 @@ import {
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
         Dashboard
       </a>
+      <a [routerLink]=" ['./block-enrolment'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        Block Enrolment
+      </a>
       <a (click)="logout()">
         Log out
       </a>
