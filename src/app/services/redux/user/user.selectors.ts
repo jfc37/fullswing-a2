@@ -1,5 +1,5 @@
-import { UserState } from './user-state.model';
-import { AppState } from '../app/app-state.model';
+import { UserState } from './user.model';
+import { AppState } from '../app/app.model';
 import { createSelector } from 'reselect';
 
 export const getUserState = (app: AppState) => app.user;

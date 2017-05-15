@@ -1,8 +1,8 @@
 import { getUserState } from './services/redux/user/user.selectors';
 import { LoggedOutAction } from './services/redux/user/user.actions';
-import { AppState } from './services/redux/app/app-state.model';
+import { AppState } from './services/redux/app/app.model';
 import * as rootReducer from './services/redux/root/root-reducer';
-import { UserState } from './services/redux/user/user-state.model';
+import { UserState } from './services/redux/user/user.model';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 /*

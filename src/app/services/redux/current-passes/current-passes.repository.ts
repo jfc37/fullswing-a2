@@ -1,4 +1,4 @@
-import { CurrentPass } from './current-passes-state.model';
+import { CurrentPass } from './current-passes.model';
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';

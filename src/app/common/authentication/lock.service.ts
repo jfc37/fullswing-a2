@@ -1,5 +1,5 @@
 import { LoggedInAction } from '../../services/redux/user/user.actions';
-import { AppState } from '../../services/redux/app/app-state.model';
+import { AppState } from '../../services/redux/app/app.model';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import Auth0Lock from 'auth0-lock';

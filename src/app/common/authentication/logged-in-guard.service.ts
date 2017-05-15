@@ -1,6 +1,6 @@
 import * as user from '../../services/redux/user/user.selectors';
-import { AppState } from '../../services/redux/app/app-state.model';
-import { UserState } from '../../services/redux/user/user-state.model';
+import { AppState } from '../../services/redux/app/app.model';
+import { UserState } from '../../services/redux/user/user.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';

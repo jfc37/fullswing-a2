@@ -1,4 +1,4 @@
-import { UpcomingClass } from './upcoming-schedule-state.model';
+import { UpcomingClass } from './upcoming-schedule.model';
 import { Action } from '@ngrx/store';
 
 export const LOAD = '[Upcoming Schedule] Load';

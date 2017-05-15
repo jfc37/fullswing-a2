@@ -1,4 +1,4 @@
-import { UpcomingScheduleState } from './upcoming-schedule-state.model';
+import { UpcomingScheduleState } from './upcoming-schedule.model';
 import * as upcomingSchedule from './upcoming-schedule.actions';
 
 export const initialState: UpcomingScheduleState = {

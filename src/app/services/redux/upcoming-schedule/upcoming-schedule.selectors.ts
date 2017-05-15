@@ -1,5 +1,5 @@
-import { UpcomingScheduleState } from './upcoming-schedule-state.model';
-import { AppState } from '../app/app-state.model';
+import { UpcomingScheduleState } from './upcoming-schedule.model';
+import { AppState } from '../app/app.model';
 import { createSelector } from 'reselect';
 
 export const getUpcomingScheduleState = (app: AppState) => app.upcomingSchedule;

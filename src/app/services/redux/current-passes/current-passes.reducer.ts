@@ -1,4 +1,4 @@
-import { CurrentPassesState } from './current-passes-state.model';
+import { CurrentPassesState } from './current-passes.model';
 import * as currentPasses from './current-passes.actions';
 
 export const initialState: CurrentPassesState = {

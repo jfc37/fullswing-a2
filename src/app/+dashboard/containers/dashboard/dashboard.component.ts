@@ -4,7 +4,7 @@ import * as upcomingSchedule from '../../../services/redux/upcoming-schedule/upc
 import * as currentPasses from '../../../services/redux/current-passes/current-passes.selectors';
 import { Observable } from 'rxjs/Rx';
 import { LoadUpcomingSchedule } from '../../../services/redux/upcoming-schedule/upcoming-schedule.actions';
-import { AppState } from '../../../services/redux/app/app-state.model';
+import { AppState } from '../../../services/redux/app/app.model';
 import { Store } from '@ngrx/store';
 import { UpcomingSchduleModel } from '../../components/upcoming-schedule/upcoming-schedule.model';
 import { Component, OnInit } from '@angular/core';

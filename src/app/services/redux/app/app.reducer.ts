@@ -1,6 +1,6 @@
 import { currentPassesReducer } from '../current-passes/current-passes.reducer';
 import { upcomingScheduleReducer } from '../upcoming-schedule/upcoming-schedule.reducer';
-import { AppState } from './app-state.model';
+import { AppState } from './app.model';
 import { ActionReducer } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
