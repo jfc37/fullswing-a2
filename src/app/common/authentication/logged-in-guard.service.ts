@@ -1,4 +1,4 @@
-import { getUserLoading, getUserLoggedIn } from '../../services/redux/user/user.selectors';
+import * as user from '../../services/redux/user/user.selectors';
 import { AppState } from '../../services/redux/app/app-state.model';
 import { UserState } from '../../services/redux/user/user-state.model';
 import { Store } from '@ngrx/store';
@@ -30,12 +30,12 @@ export class LoggedInGuard implements CanActivate {
     }
 
     private waitUntilLoaded(): Observable<boolean> {
-       return this._store.select(getUserLoading)
+       return this._store.select(user.getIsLoading)
           .filter(isLoading => !isLoading);
     }
 
     private isLoggedIn(): Observable<boolean> {
-        return this._store.select(getUserLoggedIn);
+        return this._store.select(user.getIsLoggedIn);
     }
 
 }

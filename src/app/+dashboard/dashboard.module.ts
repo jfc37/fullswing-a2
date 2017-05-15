@@ -1,3 +1,4 @@
+import { CurrentPassesComponent } from './components/current-passes/current-passes.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,9 @@ console.log('`Dashboard` bundle loaded asynchronously');
 @NgModule({
   declarations: [
     DashboardComponent,
-    UpcomingScheduleComponent
+
+    UpcomingScheduleComponent,
+    CurrentPassesComponent
   ],
   imports: [
     CommonModule,

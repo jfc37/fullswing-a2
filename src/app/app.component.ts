@@ -35,8 +35,6 @@ import {
       </a>
     </nav>
     
-    <pre>{{user$ | async | json}}</pre>
-    
     <main>
       <router-outlet></router-outlet>
     </main>

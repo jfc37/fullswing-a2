@@ -1,10 +1,13 @@
+import { CurrentPassesEffects } from './services/redux/current-passes/current-passes.effects';
+import { HttpDecorator } from './common/http/http-decorator';
+import { UpcomingScheduleEffects } from './services/redux/upcoming-schedule/upcoming-schedule.effects';
 import { UserEffects } from './services/redux/user/user.effects';
 import { userReducer } from './services/redux/user/user.reducer';
 import { appReducer } from './services/redux/app/app.reducer';
 import { CommonModule } from './common/common.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import {
   NgModule,
   ApplicationRef
@@ -71,10 +74,13 @@ type StoreType = {
     RouterStoreModule.connectRouter(),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(UserEffects),
+    EffectsModule.run(UpcomingScheduleEffects),
+    EffectsModule.run(CurrentPassesEffects),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    { provide: Http, useClass: HttpDecorator }
   ]
 })
 export class AppModule {

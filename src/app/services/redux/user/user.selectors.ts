@@ -4,8 +4,5 @@ import { createSelector } from 'reselect';
 
 export const getUserState = (app: AppState) => app.user;
 
-const getLoading = (user: UserState) => user.isLoading;
-const getLoggedIn = (user: UserState) => user.isLoggedIn;
-
-export const getUserLoading = createSelector(getUserState, getLoading);
-export const getUserLoggedIn = createSelector(getUserState, getLoggedIn);
+export const getIsLoading = createSelector(getUserState, (user: UserState) => user.isLoading);
+export const getIsLoggedIn = createSelector(getUserState, (user: UserState) => user.isLoggedIn);
