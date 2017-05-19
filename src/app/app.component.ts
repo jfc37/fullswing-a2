@@ -19,7 +19,7 @@ import {
  * Top Level Component
  */
 @Component({
-  selector: 'app',
+  selector: 'fs-app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
     './app.component.css'

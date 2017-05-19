@@ -1,3 +1,6 @@
+import { PipesModule } from '../pipes/pipes.module';
+import { BlockGroupComponent } from './components/block-group/block-group.component';
+import { BlockDisplayComponent } from './components/block-display/block-display.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -10,11 +13,14 @@ console.log('`Block Enrolment` bundle loaded asynchronously');
 
 @NgModule({
   declarations: [
-    BlockEnrolmentComponent
+    BlockEnrolmentComponent,
+    BlockGroupComponent,
+    BlockDisplayComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    PipesModule,
     RouterModule.forChild(routes),
   ],
 })

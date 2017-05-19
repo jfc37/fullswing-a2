@@ -1,5 +1,11 @@
 import { BlocksForEnrolmentRepository } from './blocks-for-enrolment.repository';
-import { LoadBlocksForEnrolmentFailed, LoadBlocksForEnrolmentSucceded } from './blocks-for-enrolment.actions';
+import {
+    Enrol,
+    EnrolFailed,
+    EnrolSucceded,
+    LoadBlocksForEnrolmentFailed,
+    LoadBlocksForEnrolmentSucceded
+} from './blocks-for-enrolment.actions';
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Rx';
@@ -18,6 +24,15 @@ export class BlocksForEnrolmentsEffects {
                 ? Observable.of(new LoadBlocksForEnrolmentSucceded([])) as Observable<Action>
                 : Observable.of(new LoadBlocksForEnrolmentFailed(response)) as Observable<Action>
             )
+        );
+
+    @Effect()
+    public enrol$: Observable<Action> = this._actions$
+        .ofType(blocksForEnrolment.ENROL)
+        .map((action: Enrol) => action.id)
+        .switchMap(id => this._repository.enrol(id)
+            .map(() => new EnrolSucceded(id))
+            .catch(() => Observable.of(new EnrolFailed(id)))
         );
 
     constructor(

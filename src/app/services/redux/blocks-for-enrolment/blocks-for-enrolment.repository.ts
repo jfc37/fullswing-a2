@@ -13,11 +13,15 @@ export class BlocksForEnrolmentRepository {
             .map(response => response.json() as BlockDto[])
             .map(dtos => dtos.map(dto => ({
                 id: dto.id,
-                isAlreadyRegistered: dto.isAlreadyRegistered,
+                isEnroled: dto.isAlreadyRegistered,
                 minutesPerClass: dto.minutesPerClass,
                 name: dto.name,
                 spacesAvailable: dto.spacesAvailable,
                 startDate: dto.startDate
             } as BlockForEnrolment)));
+    }
+
+    public enrol(id: number): Observable<any> {
+        return this._http.post('https://api-speedydonkey.azurewebsites.net/api/users/current/enrolment', { blockIds: [ id ] });
     }
 }

@@ -11,5 +11,8 @@ export interface BlockForEnrolment {
     startDate: Date;
     minutesPerClass: number;
     spacesAvailable: number;
-    isAlreadyRegistered: boolean;
+    isEnroled: boolean;
+
+    isLoading: boolean;
+    hasErrored: boolean;
 }
