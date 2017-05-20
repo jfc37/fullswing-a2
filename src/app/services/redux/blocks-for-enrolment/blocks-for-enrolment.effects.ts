@@ -1,12 +1,6 @@
 import { mapFromDtos } from './blocks-for-enrolment.model';
 import { BlockRepository, EnrolmentRepository } from '../../apis/repositories';
-import {
-    Enrol,
-    EnrolFailed,
-    EnrolSucceded,
-    LoadBlocksForEnrolmentFailed,
-    LoadBlocksForEnrolmentSucceded
-} from './blocks-for-enrolment.actions';
+import * as actions from './blocks-for-enrolment.actions';
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Rx';
@@ -21,20 +15,20 @@ export class BlocksForEnrolmentsEffects {
         .ofType(blocksForEnrolment.LOAD)
         .switchMap(() => this._blockRepository.getForEnrolment()
             .map(mapFromDtos)
-            .map(blocks => new LoadBlocksForEnrolmentSucceded(blocks))
+            .map(blocks => new actions.LoadBlocksForEnrolmentSucceded(blocks))
             .catch(response => response.status === 404
-                ? Observable.of(new LoadBlocksForEnrolmentSucceded([])) as Observable<Action>
-                : Observable.of(new LoadBlocksForEnrolmentFailed(response)) as Observable<Action>
+                ? Observable.of(new actions.LoadBlocksForEnrolmentSucceded([])) as Observable<Action>
+                : Observable.of(new actions.LoadBlocksForEnrolmentFailed(response)) as Observable<Action>
             )
         );
 
     @Effect()
     public enrol$: Observable<Action> = this._actions$
         .ofType(blocksForEnrolment.ENROL)
-        .map((action: Enrol) => action.id)
+        .map((action: actions.Enrol) => action.id)
         .switchMap(id => this._enrolmentRepository.enrol(id)
-            .map(() => new EnrolSucceded(id))
-            .catch(() => Observable.of(new EnrolFailed(id)))
+            .map(() => new actions.EnrolSucceded(id))
+            .catch(() => Observable.of(new actions.EnrolFailed(id)))
         );
 
     constructor(

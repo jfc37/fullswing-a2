@@ -1,4 +1,4 @@
-import { ScheduleDto } from '../../apis/dtos';
+import { ScheduledClassDto } from '../../apis/dtos';
 
 export interface UpcomingScheduleState {
     isLoading: boolean;
@@ -16,7 +16,7 @@ export interface UpcomingClass {
  * Maps schedule dto to state model
  * @param dto
  */
-export function mapFromDto(dto: ScheduleDto): UpcomingClass {
+export function mapFromDto(dto: ScheduledClassDto): UpcomingClass {
     return {
         name: dto.name,
         startTime: dto.startTime

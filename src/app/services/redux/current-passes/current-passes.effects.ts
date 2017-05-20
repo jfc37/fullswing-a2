@@ -1,6 +1,6 @@
 import { mapFromDto } from './current-passes.model';
 import { PassRepository } from '../../apis/repositories';
-import { LoadCurrentPassesFailed, LoadCurrentPassesSucceded } from './current-passes.actions';
+import * as actions from './current-passes.actions';
 import { empty } from 'rxjs/observable/empty';
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
@@ -16,10 +16,10 @@ export class CurrentPassesEffects {
         .ofType(currentPasses.LOAD)
         .switchMap(() => this._repository.getCurrentPasses()
             .map(dtos => dtos.map(mapFromDto))
-            .map(passes => new LoadCurrentPassesSucceded(passes))
+            .map(passes => new actions.LoadCurrentPassesSucceded(passes))
             .catch(response => response.status === 404
-                   ? Observable.of(new LoadCurrentPassesSucceded([])) as Observable<Action>
-                   : Observable.of(new LoadCurrentPassesFailed(response)) as Observable<Action>
+                   ? Observable.of(new actions.LoadCurrentPassesSucceded([])) as Observable<Action>
+                   : Observable.of(new actions.LoadCurrentPassesFailed(response)) as Observable<Action>
             )
         );
 
