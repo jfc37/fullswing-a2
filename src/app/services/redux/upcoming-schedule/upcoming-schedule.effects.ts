@@ -1,4 +1,5 @@
-import { UpcomingScheduleRepository } from './upcoming-schedule.repository';
+import { mapFromDto } from './upcoming-schedule.model';
+import { ScheduleRepository } from '../../apis/repositories/schedule.repository';
 import { LoadUpcomingScheduleFailed, LoadUpcomingScheduleSucceded } from './upcoming-schedule.actions';
 import { empty } from 'rxjs/observable/empty';
 import { Observable } from 'rxjs/Rx';
@@ -14,6 +15,7 @@ export class UpcomingScheduleEffects {
     public load$: Observable<Action> = this._actions$
         .ofType(upcomingSchedule.LOAD)
         .switchMap(() => this._repository.get()
+            .map(dtos => dtos.map(mapFromDto))
             .map(classes => new LoadUpcomingScheduleSucceded(classes))
             .catch(response => response.status === 404
                    ? Observable.of(new LoadUpcomingScheduleSucceded([])) as Observable<Action>
@@ -23,5 +25,5 @@ export class UpcomingScheduleEffects {
 
     constructor(
         private _actions$: Actions,
-        private _repository: UpcomingScheduleRepository) {}
+        private _repository: ScheduleRepository) {}
 }

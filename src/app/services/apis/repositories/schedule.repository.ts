@@ -1,13 +1,14 @@
-import { UpcomingClass } from './upcoming-schedule.model';
 import { Observable } from 'rxjs/Rx';
-import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+
+import { ScheduledClassDto } from '../dtos';
 
 @Injectable()
-export class UpcomingScheduleRepository {
+export class ScheduleRepository {
     constructor(private _http: Http) {}
 
-    public get(): Observable<UpcomingClass[]> {
+    public get(): Observable<ScheduledClassDto[]> {
         return this._http.get('https://api-speedydonkey.azurewebsites.net/api/users/current/schedules')
             .map(response => response.json());
     }

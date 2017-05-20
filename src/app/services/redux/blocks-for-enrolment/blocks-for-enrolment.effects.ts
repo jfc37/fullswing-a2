@@ -1,4 +1,5 @@
-import { BlocksForEnrolmentRepository } from './blocks-for-enrolment.repository';
+import { mapFromDtos } from './blocks-for-enrolment.model';
+import { BlockRepository, EnrolmentRepository } from '../../apis/repositories';
 import {
     Enrol,
     EnrolFailed,
@@ -18,7 +19,8 @@ export class BlocksForEnrolmentsEffects {
     @Effect()
     public load$: Observable<Action> = this._actions$
         .ofType(blocksForEnrolment.LOAD)
-        .switchMap(() => this._repository.get()
+        .switchMap(() => this._blockRepository.getForEnrolment()
+            .map(mapFromDtos)
             .map(blocks => new LoadBlocksForEnrolmentSucceded(blocks))
             .catch(response => response.status === 404
                 ? Observable.of(new LoadBlocksForEnrolmentSucceded([])) as Observable<Action>
@@ -30,12 +32,13 @@ export class BlocksForEnrolmentsEffects {
     public enrol$: Observable<Action> = this._actions$
         .ofType(blocksForEnrolment.ENROL)
         .map((action: Enrol) => action.id)
-        .switchMap(id => this._repository.enrol(id)
+        .switchMap(id => this._enrolmentRepository.enrol(id)
             .map(() => new EnrolSucceded(id))
             .catch(() => Observable.of(new EnrolFailed(id)))
         );
 
     constructor(
         private _actions$: Actions,
-        private _repository: BlocksForEnrolmentRepository) {}
+        private _blockRepository: BlockRepository,
+        private _enrolmentRepository: EnrolmentRepository) {}
 }

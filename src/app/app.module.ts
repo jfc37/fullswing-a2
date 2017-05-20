@@ -1,6 +1,6 @@
+import { ApiModule } from './services/apis/api.module';
 import { BlocksForEnrolmentsEffects } from './services/redux/blocks-for-enrolment/blocks-for-enrolment.effects';
 import { CurrentPassesEffects } from './services/redux/current-passes/current-passes.effects';
-import { HttpDecorator } from './common/http/http-decorator';
 import { UpcomingScheduleEffects } from './services/redux/upcoming-schedule/upcoming-schedule.effects';
 import { UserEffects } from './services/redux/user/user.effects';
 import { userReducer } from './services/redux/user/user.reducer';
@@ -69,6 +69,7 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: NoPreloading }),
+    ApiModule,
     CommonModule,
 
     StoreModule.provideStore(appReducer),
@@ -81,8 +82,7 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS,
-    { provide: Http, useClass: HttpDecorator }
+    APP_PROVIDERS
   ]
 })
 export class AppModule {
