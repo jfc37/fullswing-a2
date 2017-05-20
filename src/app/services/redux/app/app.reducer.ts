@@ -1,6 +1,7 @@
+import { blocksForEnrolmentReducer } from '../blocks-for-enrolment/blocks-for-enrolment.reducer';
 import { currentPassesReducer } from '../current-passes/current-passes.reducer';
 import { upcomingScheduleReducer } from '../upcoming-schedule/upcoming-schedule.reducer';
-import { AppState } from './app-state.model';
+import { AppState } from './app.model';
 import { ActionReducer } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
@@ -11,7 +12,8 @@ import { userReducer } from '../user/user.reducer';
 const appReducers = {
     user: userReducer,
     upcomingSchedule: upcomingScheduleReducer,
-    currentPasses: currentPassesReducer
+    currentPasses: currentPassesReducer,
+    blocksForEnrolment: blocksForEnrolmentReducer
 };
 
 const developmentReducer: ActionReducer<AppState> = compose(storeFreeze, combineReducers)(appReducers);

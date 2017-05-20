@@ -1,4 +1,4 @@
-import { CurrentPass } from './current-passes-state.model';
+import { CurrentPass } from './current-passes.model';
 import { Action } from '@ngrx/store';
 
 export const LOAD = '[Current Passes] Load';

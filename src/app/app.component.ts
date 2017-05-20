@@ -1,8 +1,8 @@
 import { getUserState } from './services/redux/user/user.selectors';
 import { LoggedOutAction } from './services/redux/user/user.actions';
-import { AppState } from './services/redux/app/app-state.model';
+import { AppState } from './services/redux/app/app.model';
 import * as rootReducer from './services/redux/root/root-reducer';
-import { UserState } from './services/redux/user/user-state.model';
+import { UserState } from './services/redux/user/user.model';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 /*
@@ -19,7 +19,7 @@ import {
  * Top Level Component
  */
 @Component({
-  selector: 'app',
+  selector: 'fs-app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
     './app.component.css'
@@ -29,6 +29,10 @@ import {
       <a [routerLink]=" ['./dashboard'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
         Dashboard
+      </a>
+      <a [routerLink]=" ['./block-enrolment'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        Block Enrolment
       </a>
       <a (click)="logout()">
         Log out

@@ -1,5 +1,5 @@
-import { CurrentPassesState } from './current-passes-state.model';
-import { AppState } from '../app/app-state.model';
+import { CurrentPassesState } from './current-passes.model';
+import { AppState } from '../app/app.model';
 import { createSelector } from 'reselect';
 
 export const getCurrentPassesState = (app: AppState) => app.currentPasses;

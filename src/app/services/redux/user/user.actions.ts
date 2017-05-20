@@ -1,4 +1,4 @@
-import { userRole } from './user-state.model';
+import { userRole } from './user.model';
 import { Action } from '@ngrx/store';
 
 export const CHECK_LOGIN_STATUS = '[User] Check Login Status';

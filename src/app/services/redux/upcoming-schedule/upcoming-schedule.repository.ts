@@ -1,4 +1,4 @@
-import { UpcomingClass } from './upcoming-schedule-state.model';
+import { UpcomingClass } from './upcoming-schedule.model';
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';

@@ -1,3 +1,4 @@
+import { BlocksForEnrolmentsEffects } from './services/redux/blocks-for-enrolment/blocks-for-enrolment.effects';
 import { CurrentPassesEffects } from './services/redux/current-passes/current-passes.effects';
 import { HttpDecorator } from './common/http/http-decorator';
 import { UpcomingScheduleEffects } from './services/redux/upcoming-schedule/upcoming-schedule.effects';
@@ -76,6 +77,7 @@ type StoreType = {
     EffectsModule.run(UserEffects),
     EffectsModule.run(UpcomingScheduleEffects),
     EffectsModule.run(CurrentPassesEffects),
+    EffectsModule.run(BlocksForEnrolmentsEffects),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
