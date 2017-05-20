@@ -19,7 +19,7 @@ import { Component, OnInit, Input } from '@angular/core';
             </div>
             <div *ngIf="!hasErrored()">
                 <div *ngIf="hasNothingScheduled()"
-                    class="nothing-scheduled">
+                    class="empty-collection">
                     Nothing scheduled for this week
                 </div>
                 <div *ngFor="let class of getUpcomingClasses()"

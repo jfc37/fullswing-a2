@@ -3,21 +3,22 @@ import {
     expectElementExists,
     expectNumberOfElementExists
 } from '../../../common/unit-test/elements.spec';
+import { UpcomingClassModel, UpcomingSchduleModel } from './upcoming-schedule.model';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { UpcomingScheduleComponent, UpcomingClassModel, UpcomingSchduleModel } from './';
+import { CurrentPassesComponent, CurrentPassesModel, PassModel } from './';
 
-describe('UpcomingScheduleComponent', () => {
-    let fixture: ComponentFixture<UpcomingScheduleComponent>;
-    let comp: UpcomingScheduleComponent;
+describe('CurrentPassesComponent', () => {
+    let fixture: ComponentFixture<CurrentPassesComponent>;
+    let comp: CurrentPassesComponent;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
-                UpcomingScheduleComponent
+                CurrentPassesComponent
             ],
             providers: [],
             schemas: [ NO_ERRORS_SCHEMA ]
@@ -26,11 +27,11 @@ describe('UpcomingScheduleComponent', () => {
 
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(UpcomingScheduleComponent);
+            fixture = TestBed.createComponent(CurrentPassesComponent);
             comp = fixture.componentInstance;
             comp.model = {
-                upcomingClasses: []
-            } as UpcomingSchduleModel;
+                passes: []
+            } as CurrentPassesModel;
         });
     }));
 
@@ -57,8 +58,8 @@ describe('UpcomingScheduleComponent', () => {
             expectElementDoesNotExist(fixture, '.empty-collection');
         });
 
-        it('should not show upcoming classes', () => {
-            expectElementDoesNotExist(fixture, '.upcoming-class');
+        it('should not show current passes', () => {
+            expectElementDoesNotExist(fixture, '.valid-pass');
         });
     });
 
@@ -80,14 +81,14 @@ describe('UpcomingScheduleComponent', () => {
             expectElementDoesNotExist(fixture, '.empty-collection');
         });
 
-        it('should not show upcoming classes', () => {
-            expectElementDoesNotExist(fixture, '.upcoming-class');
+        it('should not show current passes', () => {
+            expectElementDoesNotExist(fixture, '.valid-pass');
         });
     });
 
     describe('when nothing scheduled', () => {
         beforeEach(() => {
-            comp.model.upcomingClasses = [];
+            comp.model.passes = [];
             fixture.detectChanges();
         });
 
@@ -103,23 +104,23 @@ describe('UpcomingScheduleComponent', () => {
             expectElementDoesNotExist(fixture, '.loading');
         });
 
-        it('should not show upcoming classes', () => {
-            expectElementDoesNotExist(fixture, '.upcoming-class');
+        it('should not show current passes', () => {
+            expectElementDoesNotExist(fixture, '.valid-pass');
         });
     });
 
-    describe('when there are upcoming classes', () => {
+    describe('when there are current passes', () => {
         beforeEach(() => {
-            comp.model.upcomingClasses = [
-                {} as UpcomingClassModel,
-                {} as UpcomingClassModel
+            comp.model.passes = [
+                {} as PassModel,
+                {} as PassModel
             ];
             fixture.detectChanges();
         });
 
-        it('should show all upcoming classes', () => {
-            const expectedNumber = comp.model.upcomingClasses.length;
-            expectNumberOfElementExists(fixture, '.upcoming-class', expectedNumber);
+        it('should show all current passes', () => {
+            const expectedNumber = comp.model.passes.length;
+            expectNumberOfElementExists(fixture, '.valid-pass', expectedNumber);
         });
 
         it('should not show error', () => {
