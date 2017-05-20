@@ -1,4 +1,4 @@
-import { BlockDisplayModel } from '../block-display/block-display.model';
+import { BlockGroupModel } from './block-group.model';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -13,7 +13,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class BlockGroupComponent {
     @Input()
-    public model: BlockDisplayModel;
+    public model: BlockGroupModel;
 
     @Output()
     public enrol = new EventEmitter<number>();
