@@ -1,3 +1,5 @@
+import { TeacherDto } from './';
+
 export interface BlockDto {
     announcements: string;
     classCapacity: number;
@@ -13,5 +15,5 @@ export interface BlockDto {
     room: any;
     spacesAvailable: number;
     startDate: Date;
-    teachers: any[];
+    teachers: TeacherDto[];
 }

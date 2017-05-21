@@ -1,132 +1,33 @@
-import { BlocksForEnrolmentsEffects } from './services/redux/blocks-for-enrolment/blocks-for-enrolment.effects';
-import { CurrentPassesEffects } from './services/redux/current-passes/current-passes.effects';
-import { HttpDecorator } from './common/http/http-decorator';
-import { UpcomingScheduleEffects } from './services/redux/upcoming-schedule/upcoming-schedule.effects';
-import { UserEffects } from './services/redux/user/user.effects';
-import { userReducer } from './services/redux/user/user.reducer';
-import { appReducer } from './services/redux/app/app.reducer';
-import { CommonModule } from './common/common.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
-import {
-  NgModule,
-  ApplicationRef
-} from '@angular/core';
-import {
-  removeNgStyles,
-  createNewHosts,
-  createInputTransfer
-} from '@angularclass/hmr';
-import {
-  RouterModule,
-  PreloadAllModules,
-  NoPreloading
-} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, NoPreloading } from '@angular/router';
+import { ReduxModule } from './services/redux/redux.module';
+import { ApiModule } from './services/apis/api.module';
+import { CommonModule } from './common/common.module';
 
-/*
- * Platform and Environment providers/directives/pipes
- */
-import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
-// App is our top level component
 import { AppComponent } from './app.component';
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
 import { NoContentComponent } from './no-content';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
-import { StoreModule } from '@ngrx/store';
-import { RouterStoreModule } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
-
-// Application wide providers
-const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
-  AppState
-];
-
-type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
-};
-
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
     NoContentComponent,
   ],
-  imports: [ // import Angular's modules
+  imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: NoPreloading }),
-    CommonModule,
-
-    StoreModule.provideStore(appReducer),
-    RouterStoreModule.connectRouter(),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    EffectsModule.run(UserEffects),
-    EffectsModule.run(UpcomingScheduleEffects),
-    EffectsModule.run(CurrentPassesEffects),
-    EffectsModule.run(BlocksForEnrolmentsEffects),
-  ],
-  providers: [ // expose our Services and Providers into Angular's dependency injection
-    ENV_PROVIDERS,
-    APP_PROVIDERS,
-    { provide: Http, useClass: HttpDecorator }
+    ApiModule,
+    ReduxModule,
+    CommonModule
   ]
 })
-export class AppModule {
-
-  constructor(
-    public appRef: ApplicationRef,
-    public appState: AppState
-  ) {}
-
-  public hmrOnInit(store: StoreType) {
-    if (!store || !store.state) {
-      return;
-    }
-    console.log('HMR store', JSON.stringify(store, null, 2));
-    // set state
-    this.appState._state = store.state;
-    // set input values
-    if ('restoreInputValues' in store) {
-      let restoreInputValues = store.restoreInputValues;
-      setTimeout(restoreInputValues);
-    }
-
-    this.appRef.tick();
-    delete store.state;
-    delete store.restoreInputValues;
-  }
-
-  public hmrOnDestroy(store: StoreType) {
-    const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
-    // save state
-    const state = this.appState._state;
-    store.state = state;
-    // recreate root elements
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    // save input values
-    store.restoreInputValues  = createInputTransfer();
-    // remove styles
-    removeNgStyles();
-  }
-
-  public hmrAfterDestroy(store: StoreType) {
-    // display new elements
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
-
-}
+export class AppModule { }

@@ -1,4 +1,4 @@
-import { UpcomingSchduleModel } from './upcoming-schedule.model';
+import { UpcomingScheduleModel } from './upcoming-schedule.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 /**
@@ -8,18 +8,22 @@ import { Component, OnInit, Input } from '@angular/core';
     selector: 'fs-upcoming-schedule',
     template: `
         <h3>Upcoming Schedule</h3>
-        <div *ngIf="isLoading()">
+        <div *ngIf="isLoading()"
+            class="loading">
             Loading...
         </div>
         <div *ngIf="!isLoading()">
-            <div *ngIf="hasErrored()">
+            <div *ngIf="hasErrored()"
+                class="error">
                 Problem loading, try again later.
             </div>
             <div *ngIf="!hasErrored()">
-                <div *ngIf="hasNothingScheduled()">
+                <div *ngIf="hasNothingScheduled()"
+                    class="empty-collection">
                     Nothing scheduled for this week
                 </div>
-                <div *ngFor="let class of getUpcomingClasses()">
+                <div *ngFor="let class of getUpcomingClasses()"
+                    class="upcoming-class">
                     {{class.name}} | {{class.startTime | date:'EEEE hh:mm'}}
                 </div>
             </div>
@@ -28,7 +32,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UpcomingScheduleComponent {
     @Input()
-    public model: UpcomingSchduleModel;
+    public model: UpcomingScheduleModel;
 
     public isLoading = () => this.model.isLoading;
     public hasErrored = () => this.model.hasErrored;
