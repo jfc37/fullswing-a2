@@ -1,4 +1,4 @@
-export interface UpcomingSchduleModel {
+export interface UpcomingScheduleModel {
     upcomingClasses: UpcomingClassModel[];
 
     isLoading: boolean;

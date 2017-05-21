@@ -8,7 +8,7 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { UpcomingScheduleComponent, UpcomingClassModel, UpcomingSchduleModel } from './';
+import { UpcomingScheduleComponent, UpcomingClassModel, UpcomingScheduleModel } from './';
 
 describe('UpcomingScheduleComponent', () => {
     let fixture: ComponentFixture<UpcomingScheduleComponent>;
@@ -30,7 +30,7 @@ describe('UpcomingScheduleComponent', () => {
             comp = fixture.componentInstance;
             comp.model = {
                 upcomingClasses: []
-            } as UpcomingSchduleModel;
+            } as UpcomingScheduleModel;
         });
     }));
 

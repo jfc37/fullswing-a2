@@ -1,4 +1,4 @@
-import { UpcomingSchduleModel } from './upcoming-schedule.model';
+import { UpcomingScheduleModel } from './upcoming-schedule.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 /**
@@ -32,7 +32,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UpcomingScheduleComponent {
     @Input()
-    public model: UpcomingSchduleModel;
+    public model: UpcomingScheduleModel;
 
     public isLoading = () => this.model.isLoading;
     public hasErrored = () => this.model.hasErrored;
