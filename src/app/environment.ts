@@ -7,10 +7,6 @@ import {
   ApplicationRef,
   enableProdMode
 } from '@angular/core';
-// Environment Providers
-let PROVIDERS: any[] = [
-  // common env directives
-];
 
 // Angular debug tools in the dev console
 // https://github.com/angular/angular/blob/86405345b781a9dc2438c0fbe3e9409245647019/TOOLS_JS.md
@@ -26,11 +22,6 @@ if ('production' === ENV) {
     return modRef;
   };
 
-  PROVIDERS = [
-    ...PROVIDERS,
-    // custom providers in production
-  ];
-
 } else {
 
   _decorateModuleRef = (modRef: any) => {
@@ -44,16 +35,6 @@ if ('production' === ENV) {
     return modRef;
   };
 
-  // Development
-  PROVIDERS = [
-    ...PROVIDERS,
-    // custom providers in development
-  ];
-
 }
 
 export const decorateModuleRef = _decorateModuleRef;
-
-export const ENV_PROVIDERS = [
-  ...PROVIDERS
-];
