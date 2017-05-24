@@ -24,6 +24,10 @@ import { UserState } from './services/redux/user/user.model';
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
         Block Enrolment
       </a>
+      <a [routerLink]=" ['./blocks'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        Blocks
+      </a>
       <a (click)="logout()">
         Log out
       </a>
