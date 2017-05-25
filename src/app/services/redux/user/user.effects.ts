@@ -38,7 +38,7 @@ export class UserEffects {
         .map(action => action.payload)
         .do(payload => {
             localStorage.setItem('id_token', payload.idToken);
-            this._router.navigate(['/block-enrolment']);
+            this._router.navigate(['/blocks']);
         })
         .switchMap(payload => this._lock.getProfile(payload.idToken))
         .map(payload => ({
