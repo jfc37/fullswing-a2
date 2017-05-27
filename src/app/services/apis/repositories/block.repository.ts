@@ -17,4 +17,9 @@ export class BlockRepository {
         return this._http.get('https://api-speedydonkey.azurewebsites.net/api/blocks')
             .map(response => response.json());
     }
+
+    public get(id: number): Observable<BlockDto> {
+        return this._http.get(`https://api-speedydonkey.azurewebsites.net/api/blocks/${id}`)
+            .map(response => response.json());
+    }
 }

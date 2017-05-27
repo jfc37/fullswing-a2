@@ -4,12 +4,14 @@ import * as blocks from './blocks.actions';
 export const initialState: BlocksState = {
     isLoading: null,
     errors: [],
-    blocks: []
+    blocks: [],
+    selectedBlock: null
 };
 
 export function blocksReducer(state = initialState, action: blocks.Actions): BlocksState {
     switch (action.type) {
-        case blocks.LOAD: {
+        case blocks.LOAD:
+        case blocks.LOAD_SELECTED: {
             return Object.assign({}, state, {
                 isLoading: true
             });
@@ -23,13 +25,22 @@ export function blocksReducer(state = initialState, action: blocks.Actions): Blo
 
         }
 
-        case blocks.LOAD_FAILED: {
+        case blocks.LOAD_FAILED:
+        case blocks.LOAD_SELECTED_FAILED: {
             return Object.assign({}, state, {
                isLoading: false,
                errors: [
                    action.error
                ]
             });
+        }
+
+        case blocks.LOAD_SELECTED_SUCCEDED: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                selectedBlock: action.block
+            });
+
         }
 
         default: {

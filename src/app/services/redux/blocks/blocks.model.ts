@@ -1,9 +1,11 @@
 import { BlockDto } from '../../apis/dtos/block.dto';
+
 export interface BlocksState {
     isLoading: boolean;
     errors: string[];
 
     blocks: Block[];
+    selectedBlock: Block;
 }
 
 export interface Block {
@@ -21,8 +23,8 @@ export interface Block {
     enroledStudents: any[];
 }
 
-export function dtosToBlocks(dtos: BlockDto[]): Block[] {
-    return dtos.map(dto => ({
+export function dtoToBlock(dto: BlockDto): Block {
+    return {
         id: dto.id,
         name: dto.name,
         numberOfClasses: dto.numberOfClasses,
@@ -34,5 +36,9 @@ export function dtosToBlocks(dtos: BlockDto[]): Block[] {
         teachers: [],
         classes: [],
         enroledStudents: []
-    }));
+    };
+}
+
+export function dtosToBlocks(dtos: BlockDto[]): Block[] {
+    return dtos.map(dtoToBlock);
 }

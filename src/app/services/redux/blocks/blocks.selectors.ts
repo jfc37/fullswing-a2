@@ -14,3 +14,6 @@ export const getHasErrored =
 
 export const getBlocks =
     createSelector(getBlocksState, (blocks: BlocksState) => blocks.blocks);
+
+export const getSelectedBlock =
+    createSelector(getBlocksState, (blocks: BlocksState) => blocks.selectedBlock);

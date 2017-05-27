@@ -1,5 +1,5 @@
 import { BlockRepository } from '../../apis/repositories/block.repository';
-import { dtosToBlocks } from './blocks.model';
+import { dtosToBlocks, dtoToBlock } from './blocks.model';
 import * as actions from './blocks.actions';
 import { empty } from 'rxjs/observable/empty';
 import { Observable } from 'rxjs/Rx';
@@ -19,6 +19,19 @@ export class BlocksEffects {
             .map(blocks => new actions.LoadBlocksSucceded(blocks))
             .catch(response => response.status === 404
                    ? Observable.of(new actions.LoadBlocksSucceded([])) as Observable<Action>
+                   : Observable.of(new actions.LoadBlocksFailed(response)) as Observable<Action>
+            )
+        );
+
+    @Effect()
+    public loadSelected$: Observable<Action> = this._actions$
+        .ofType(blocks.LOAD_SELECTED)
+        .map(action => action.id)
+        .switchMap(id => this._repository.get(id)
+            .map(dtoToBlock)
+            .map(block => new actions.LoadSelectedBlockSucceded(block))
+            .catch(response => response.status === 404
+                   ? Observable.of(new actions.LoadBlocksFailed(new Error(`Could not find selected block`))) as Observable<Action>
                    : Observable.of(new actions.LoadBlocksFailed(response)) as Observable<Action>
             )
         );
