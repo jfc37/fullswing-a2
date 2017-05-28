@@ -1,3 +1,4 @@
+import { ClassesState } from '../classes/classes.model';
 import { TeachersState } from '../teachers/teachers.model';
 import { BlocksState } from '../blocks/blocks.model';
 import { BlocksForEnrolmentState } from '../blocks-for-enrolment/blocks-for-enrolment.model';
@@ -12,4 +13,5 @@ export interface AppState {
     blocksForEnrolment: BlocksForEnrolmentState;
     blocks: BlocksState;
     teachers: TeachersState;
+    classes: ClassesState;
 }

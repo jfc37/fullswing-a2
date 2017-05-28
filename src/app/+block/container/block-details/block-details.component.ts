@@ -1,3 +1,5 @@
+import { ClassListModel } from '../../components/class-list/class-list.model';
+import { BlockSummaryModel } from '../../components/block-summary/block-summary.model';
 import { BlockDetailsSelector } from './block-details.selector';
 import { BlockDetailsDispatcher } from './block-details.dispatcher';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -8,6 +10,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
     selector: 'fs-block-details',
     template: `
         <h2>{{title$ | async}}</h2>
+        <fs-class-list [model]="classListModel$ | async"></fs-class-list>
         <fs-block-summary [model]="summaryModel$ | async"></fs-block-summary>
     `,
     providers: [
@@ -17,7 +20,8 @@ import { Observable, Subscription } from 'rxjs/Rx';
 })
 export class BlockDetailsComponent implements OnInit, OnDestroy {
 
-    public summaryModel$: Observable<any>;
+    public summaryModel$: Observable<BlockSummaryModel>;
+    public classListModel$: Observable<ClassListModel>;
     public title$: Observable<string>;
 
     private _dispatchSubscription: Subscription;
@@ -34,6 +38,7 @@ export class BlockDetailsComponent implements OnInit, OnDestroy {
 
         this.title$ = this._selector.getTitle();
         this.summaryModel$ = this._selector.getSummaryModel();
+        this.classListModel$ = this._selector.getClassListModel();
     }
 
     public ngOnDestroy(): void {

@@ -1,9 +1,10 @@
+import { ClassDto } from './class.dto';
 import { TeacherDto } from './teacher.dto';
 
 export interface BlockDto {
     announcements: any;
     classCapacity: number;
-    classes: any[];
+    classes: ClassDto[];
     endDate: Date;
     enroledStudents: any[];
     id: number;

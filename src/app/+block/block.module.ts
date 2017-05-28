@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 
 import { routes } from './block.routes';
 import { BlockListDisplayComponent } from './components/block-list-display/block-list-display.component';
+import { ClassListComponent } from './components/class-list/class-list.component';
 
 console.log('`Block` bundle loaded asynchronously');
 
@@ -20,7 +21,8 @@ console.log('`Block` bundle loaded asynchronously');
     BlockTableComponent,
 
     BlockDetailsComponent,
-    BlockSummaryComponent
+    BlockSummaryComponent,
+    ClassListComponent
   ],
   imports: [
     CommonModule,

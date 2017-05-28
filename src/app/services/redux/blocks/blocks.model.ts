@@ -1,4 +1,5 @@
 import { BlockDto } from '../../apis/dtos/block.dto';
+import { toIdArray } from '../../../common/util/array.util';
 
 export interface BlocksState {
     isLoading: boolean;
@@ -41,10 +42,4 @@ export function dtoToBlock(dto: BlockDto): Block {
 
 export function dtosToBlocks(dtos: BlockDto[]): Block[] {
     return dtos.map(dtoToBlock);
-}
-
-function toIdArray(array: Array<{id: number}>): number[] {
-    return array
-        ? array.map(a => a.id)
-        : [];
 }

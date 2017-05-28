@@ -1,3 +1,4 @@
+import { classesReducer } from '../classes/classes.reducer';
 import { teachersReducer } from '../teachers/teachers.reducer';
 import { blocksReducer } from '../blocks/blocks.reducer';
 import { blocksForEnrolmentReducer } from '../blocks-for-enrolment/blocks-for-enrolment.reducer';
@@ -17,7 +18,8 @@ const appReducers = {
     currentPasses: currentPassesReducer,
     blocksForEnrolment: blocksForEnrolmentReducer,
     blocks: blocksReducer,
-    teachers: teachersReducer
+    teachers: teachersReducer,
+    classes: classesReducer
 };
 
 const developmentReducer: ActionReducer<AppState> = compose(storeFreeze, combineReducers)(appReducers);

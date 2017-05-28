@@ -1,7 +1,9 @@
+import { dtosToClasses } from '../classes/classes.model';
 import { BlockRepository } from '../../apis/repositories/block.repository';
 import { dtosToBlocks, dtoToBlock } from './blocks.model';
 import * as blockActions from './blocks.actions';
 import * as teacherActions from '../teachers/teachers.actions';
+import * as classActions from '../classes/classes.actions';
 import { empty } from 'rxjs/observable/empty';
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
@@ -29,10 +31,15 @@ export class BlocksEffects {
         .ofType(blockActions.LOAD_SELECTED)
         .map(action => action.id)
         .switchMap(id => this._repository.get(id)
-            .map(dto => ({block: dtoToBlock(dto), teachers: dtosToTeachers(dto.teachers)}))
-            .mergeMap(({block, teachers}) => [
+            .map(dto => ({
+                block: dtoToBlock(dto),
+                teachers: dtosToTeachers(dto.teachers),
+                classes: dtosToClasses(dto.classes)
+            }))
+            .mergeMap(({block, teachers, classes}) => [
                 new blockActions.LoadSelectedBlockSucceded(block),
-                new teacherActions.AddTeachers(teachers)
+                new teacherActions.AddTeachers(teachers),
+                new classActions.AddClasses(classes)
             ])
             .catch(response => response.status === 404
                    ? Observable.of(new blockActions.LoadBlocksFailed(new Error(`Could not find selected block`))) as Observable<Action>

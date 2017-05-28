@@ -1,6 +1,8 @@
+import { ClassListModel } from '../../components/class-list/class-list.model';
 import { BlockSummaryModel } from '../../components/block-summary/block-summary.model';
 import * as blocks from '../../../services/redux/blocks/blocks.selectors';
 import * as teachers from '../../../services/redux/teachers/teachers.selectors';
+import * as classes from '../../../services/redux/classes/classes.selectors';
 import { AppState } from '../../../services/redux/app/app.model';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -9,6 +11,24 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class BlockDetailsSelector {
     constructor(private _store: Store<AppState>) { }
+
+    public getClassListModel(): Observable<ClassListModel> {
+        const isLoading$ = this._store.select(blocks.getLoading);
+        const hasErrored$ = this._store.select(blocks.getHasErrored);
+        const classes$ = this._store.select(classes.getClassesForSelectedBlock);
+
+        return Observable.combineLatest(isLoading$, hasErrored$, classes$)
+            .map(([isLoading, hasErrored, classes]) => ({
+                isLoading,
+                hasErrored,
+                classes: classes.map(c => ({
+                    id: c.id,
+                    name: c.name,
+                    attendance: c.actualStudents.length,
+                    date: c.startTime
+                }))
+            }));
+    }
 
     public getSummaryModel(): Observable<BlockSummaryModel> {
         const isLoading$ = this._store.select(blocks.getLoading);
