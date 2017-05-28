@@ -18,9 +18,9 @@ export interface Block {
     isInviteOnly: boolean;
     minutesPerClass: number;
 
-    teachers: any[];
-    classes: any[];
-    enroledStudents: any[];
+    teachers: number[];
+    classes: number[];
+    enroledStudents: number[];
 }
 
 export function dtoToBlock(dto: BlockDto): Block {
@@ -33,12 +33,18 @@ export function dtoToBlock(dto: BlockDto): Block {
         endDate: dto.endDate,
         isInviteOnly: dto.isInviteOnly,
         minutesPerClass: dto.minutesPerClass,
-        teachers: [],
-        classes: [],
-        enroledStudents: []
+        teachers: toIdArray(dto.teachers),
+        classes: toIdArray(dto.classes),
+        enroledStudents: toIdArray(dto.enroledStudents)
     };
 }
 
 export function dtosToBlocks(dtos: BlockDto[]): Block[] {
     return dtos.map(dtoToBlock);
+}
+
+function toIdArray(array: Array<{id: number}>): number[] {
+    return array
+        ? array.map(a => a.id)
+        : [];
 }

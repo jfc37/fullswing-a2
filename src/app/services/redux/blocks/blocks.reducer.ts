@@ -10,10 +10,16 @@ export const initialState: BlocksState = {
 
 export function blocksReducer(state = initialState, action: blocks.Actions): BlocksState {
     switch (action.type) {
-        case blocks.LOAD:
-        case blocks.LOAD_SELECTED: {
+        case blocks.LOAD: {
             return Object.assign({}, state, {
                 isLoading: true
+            });
+        }
+
+        case blocks.LOAD_SELECTED: {
+            return Object.assign({}, state, {
+                isLoading: true,
+                selectedBlock: null
             });
         }
 

@@ -1,25 +1,26 @@
 import { BlockDetailsSelector } from './block-details.selector';
 import { BlockDetailsDispatcher } from './block-details.dispatcher';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 @Component({
     selector: 'fs-block-details',
     template: `
-        <h2>BLOCK DETAILS</h2>
-        <a routerLink="/blocks/220">220</a>
-        <a routerLink="/blocks/221">221</a>
-        <pre>{{model$ | async | json}}</pre>
+        <h2>{{title$ | async}}</h2>
+        <fs-block-summary [model]="summaryModel$ | async"></fs-block-summary>
     `,
     providers: [
         BlockDetailsDispatcher,
         BlockDetailsSelector
     ]
 })
-export class BlockDetailsComponent implements OnInit {
+export class BlockDetailsComponent implements OnInit, OnDestroy {
 
-    public model$: Observable<any>;
+    public summaryModel$: Observable<any>;
+    public title$: Observable<string>;
+
+    private _dispatchSubscription: Subscription;
 
     constructor(
         private _route: ActivatedRoute,
@@ -27,11 +28,18 @@ export class BlockDetailsComponent implements OnInit {
         private _selector: BlockDetailsSelector) {}
 
     public ngOnInit(): void {
-        this._route.params.map(params => params.id)
+        this._dispatchSubscription = this._route.params.map(params => params.id)
             .distinctUntilChanged()
             .subscribe(id => this._dispatcher.initialise(id));
 
-        this.model$ = this._selector.getModel();
+        this.title$ = this._selector.getTitle();
+        this.summaryModel$ = this._selector.getSummaryModel();
+    }
+
+    public ngOnDestroy(): void {
+        if (this._dispatchSubscription) {
+            this._dispatchSubscription.unsubscribe();
+        }
     }
 
 }

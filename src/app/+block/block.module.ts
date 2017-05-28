@@ -1,3 +1,4 @@
+import { BlockSummaryComponent } from './components/block-summary/block-summary.component';
 import { BlockDetailsComponent } from './container/block-details/block-details.component';
 import { BlockTableComponent } from './components/block-table/block-table.component';
 import { BlockListComponent } from './container/block-list/block-list.component';
@@ -18,7 +19,8 @@ console.log('`Block` bundle loaded asynchronously');
     BlockListDisplayComponent,
     BlockTableComponent,
 
-    BlockDetailsComponent
+    BlockDetailsComponent,
+    BlockSummaryComponent
   ],
   imports: [
     CommonModule,
