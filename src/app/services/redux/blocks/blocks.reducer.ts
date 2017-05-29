@@ -5,7 +5,8 @@ export const initialState: BlocksState = {
     isLoading: null,
     errors: [],
     blocks: [],
-    selectedBlock: null
+    selectedBlock: null,
+    selectedBlockId: null
 };
 
 export function blocksReducer(state = initialState, action: blocks.Actions): BlocksState {
@@ -19,7 +20,7 @@ export function blocksReducer(state = initialState, action: blocks.Actions): Blo
         case blocks.LOAD_SELECTED: {
             return Object.assign({}, state, {
                 isLoading: true,
-                selectedBlock: null
+                selectedBlockId: action.id
             });
         }
 

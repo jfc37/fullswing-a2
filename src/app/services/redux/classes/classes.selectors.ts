@@ -1,14 +1,18 @@
 import { Block } from '../blocks/blocks.model';
 import { ClassesState } from './classes.model';
-import { getSelectedBlock } from '../blocks/blocks.selectors';
+import { getSelectedBlockId } from '../blocks/blocks.selectors';
 import { AppState } from '../app/app.model';
 import { createSelector } from 'reselect';
 
 export const getClassesState = (app: AppState) => app.classes;
 
+export const getLoading =
+    createSelector(getClassesState, (classes: ClassesState) => classes.isLoading);
+
+export const getHasErrored =
+    createSelector(getClassesState, (classes: ClassesState) => classes.errors.length > 0);
+
 export const getClassesForSelectedBlock =
-    createSelector(getClassesState, getSelectedBlock,
-        (classes: ClassesState, block: Block) =>
-            block && block.classes
-            ? classes.classes.filter(t => block.classes.indexOf(t.id) > -1)
-            : []);
+    createSelector(getClassesState, getSelectedBlockId,
+        (classes: ClassesState, blockId: number) =>
+            classes.classes.filter(c => c.blockId === blockId));

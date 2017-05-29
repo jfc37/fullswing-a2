@@ -1,3 +1,4 @@
+import { ClassesEffects } from './classes/classes.effects';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { RouterStoreModule } from '@ngrx/router-store';
@@ -20,7 +21,8 @@ import { BlocksEffects } from './blocks/blocks.effects';
         EffectsModule.run(UpcomingScheduleEffects),
         EffectsModule.run(CurrentPassesEffects),
         EffectsModule.run(BlocksForEnrolmentsEffects),
-        EffectsModule.run(BlocksEffects)
+        EffectsModule.run(BlocksEffects),
+        EffectsModule.run(ClassesEffects),
     ]
 })
 export class ReduxModule { }

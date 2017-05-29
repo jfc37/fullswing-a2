@@ -6,7 +6,9 @@ export interface BlocksState {
     errors: string[];
 
     blocks: Block[];
+
     selectedBlock: Block;
+    selectedBlockId: number;
 }
 
 export interface Block {

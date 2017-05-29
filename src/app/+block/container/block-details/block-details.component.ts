@@ -32,7 +32,7 @@ export class BlockDetailsComponent implements OnInit, OnDestroy {
         private _selector: BlockDetailsSelector) {}
 
     public ngOnInit(): void {
-        this._dispatchSubscription = this._route.params.map(params => params.id)
+        this._dispatchSubscription = this._route.params.map(params => +params.id)
             .distinctUntilChanged()
             .subscribe(id => this._dispatcher.initialise(id));
 

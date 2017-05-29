@@ -17,3 +17,6 @@ export const getBlocks =
 
 export const getSelectedBlock =
     createSelector(getBlocksState, (blocks: BlocksState) => blocks.selectedBlock);
+
+export const getSelectedBlockId =
+    createSelector(getBlocksState, (blocks: BlocksState) => blocks.selectedBlockId);

@@ -13,8 +13,8 @@ export class BlockDetailsSelector {
     constructor(private _store: Store<AppState>) { }
 
     public getClassListModel(): Observable<ClassListModel> {
-        const isLoading$ = this._store.select(blocks.getLoading);
-        const hasErrored$ = this._store.select(blocks.getHasErrored);
+        const isLoading$ = this._store.select(classes.getLoading);
+        const hasErrored$ = this._store.select(classes.getHasErrored);
         const classes$ = this._store.select(classes.getClassesForSelectedBlock);
 
         return Observable.combineLatest(isLoading$, hasErrored$, classes$)

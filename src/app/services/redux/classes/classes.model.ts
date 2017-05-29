@@ -15,6 +15,7 @@ export interface Class {
     endTime: Date;
     classCapacity: number;
 
+    blockId: number;
     actualStudents: number[];
     registeredStudents: number[];
     teachers: number[];
@@ -27,6 +28,7 @@ export function dtoToClass(dto: ClassDto): Class {
         startTime: dto.startTime,
         endTime: dto.endTime,
         classCapacity: dto.classCapacity,
+        blockId: dto.block.id,
         actualStudents: toIdArray(dto.actualStudents),
         registeredStudents: toIdArray(dto.registeredStudents),
         teachers: toIdArray(dto.teachers)

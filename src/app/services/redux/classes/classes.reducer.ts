@@ -10,6 +10,29 @@ export const initialState: ClassesState = {
 
 export function classesReducer(state = initialState, action: classes.Actions): ClassesState {
     switch (action.type) {
+        case classes.LOAD_FOR_BLOCK: {
+            return Object.assign({}, state, {
+                isLoading: true
+            });
+        }
+
+        case classes.LOAD_FOR_BLOCK_SUCCESS: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                errors: []
+            });
+        }
+
+        case classes.LOAD_FOR_BLOCK_FAILED: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                errors: [
+                    ...state.errors,
+                    action.error
+                ]
+            });
+        }
+
         case classes.ADD_CLASSES: {
             return Object.assign({}, state, {
                 classes: [

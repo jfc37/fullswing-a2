@@ -33,13 +33,11 @@ export class BlocksEffects {
         .switchMap(id => this._repository.get(id)
             .map(dto => ({
                 block: dtoToBlock(dto),
-                teachers: dtosToTeachers(dto.teachers),
-                classes: dtosToClasses(dto.classes)
+                teachers: dtosToTeachers(dto.teachers)
             }))
-            .mergeMap(({block, teachers, classes}) => [
+            .mergeMap(({block, teachers}) => [
                 new blockActions.LoadSelectedBlockSucceded(block),
-                new teacherActions.AddTeachers(teachers),
-                new classActions.AddClasses(classes)
+                new teacherActions.AddTeachers(teachers)
             ])
             .catch(response => response.status === 404
                    ? Observable.of(new blockActions.LoadBlocksFailed(new Error(`Could not find selected block`))) as Observable<Action>
