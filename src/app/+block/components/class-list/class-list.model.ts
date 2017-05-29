@@ -11,4 +11,3 @@ export interface ClassSummaryModel {
     attendance: number;
     date: Date;
 }
-
