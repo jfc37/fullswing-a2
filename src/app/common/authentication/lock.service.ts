@@ -15,7 +15,7 @@ export class LockService {
 
   constructor(private _store: Store<AppState>) {
     this._lock.on('authenticated', (authResult) => {
-      this._store.dispatch(new LoggedInAction(authResult));
+      this._store.dispatch(new LoggedInAction(authResult.idToken));
       this._lock.hide();
     });
   }

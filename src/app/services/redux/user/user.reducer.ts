@@ -18,16 +18,16 @@ export function userReducer(state = initialState, action: user.Actions): UserSta
             });
         }
 
-        case user.LOGGED_IN: {
+        case user.SET_ID_TOKEN: {
             return Object.assign({}, state, {
-                isLoading: false,
                 isLoggedIn: true,
-                idToken: action.payload.idToken
+                idToken: action.idToken
             });
         }
 
         case user.SET_PROFILE: {
             return Object.assign({}, state, {
+                isLoading: false,
                 name: action.payload.name,
                 role: action.payload.role
             });
@@ -35,6 +35,7 @@ export function userReducer(state = initialState, action: user.Actions): UserSta
 
         case user.LOAD_PROFILE_FAILED: {
             return Object.assign({}, state, {
+                isLoading: false,
                 errors: [
                     ...state.errors,
                     action.error
