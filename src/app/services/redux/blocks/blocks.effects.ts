@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { dtosToTeachers } from '../teachers/teachers.model';
+import { dtoToValidation } from '../common/validation.model';
 
 @Injectable()
 export class BlocksEffects {
@@ -51,8 +52,9 @@ export class BlocksEffects {
         .map(action => blockToDto(action.block))
         .switchMap(block => this._repository.update(block)
             .map(updatedBlock => new blockActions.LoadSelectedBlock(updatedBlock.id))
-            .catch(response => Observable.of(new blockActions.UpdateBlockFailed(response))
-            )
+            .catch(response => response.status === 400
+                ? Observable.of(new blockActions.UpdateBlockValidationError(dtoToValidation(response.json()))) as Observable<Action>
+                : Observable.of(new blockActions.UpdateBlockFailed(response)) as Observable<Action>)
         );
 
     constructor(

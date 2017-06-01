@@ -1,3 +1,4 @@
+import { Validation } from '../common/validation.model';
 import { BlockDto } from '../../apis/dtos/block.dto';
 import { toIdArray } from '../../../common/util/array.util';
 import { TeacherDto } from '../../apis/dtos';
@@ -6,6 +7,7 @@ export interface BlocksState {
     isLoading: boolean;
     errors: string[];
     saveError: string;
+    validation: Validation[];
 
     blocks: Block[];
 
@@ -58,7 +60,6 @@ export function blockToDto(block: Block): BlockDto {
         endDate: block.endDate,
         isInviteOnly: block.isInviteOnly,
         minutesPerClass: block.minutesPerClass,
-        // teachers: block.teachers.map(id => ({id})) as TeacherDto[]
         teachers: []
     };
 }

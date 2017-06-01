@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
         <div *ngIf="model.isLoading">Loading...</div>
         <div *ngIf="model.hasErrored">Oops, block failed to load</div>
         <div *ngIf="model.hasSaveErrored">Oops, an error occurred while saving block</div>
+        <div *ngFor="let message of model.validationMessages">{{message}}</div>
         <div *ngIf="shouldDisplay()">
             <form [formGroup]="form" 
                   (ngSubmit)="submit($event)" novalidate>

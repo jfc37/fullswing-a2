@@ -15,6 +15,9 @@ export const getHasErrored =
 export const getHasSaveErrored =
     createSelector(getBlocksState, (blocks: BlocksState) => !!blocks.saveError);
 
+export const getValidation =
+    createSelector(getBlocksState, (blocks: BlocksState) => blocks.validation);
+
 export const getBlocks =
     createSelector(getBlocksState, (blocks: BlocksState) => blocks.blocks);
 

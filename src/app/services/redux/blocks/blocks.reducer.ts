@@ -5,6 +5,7 @@ export const initialState: BlocksState = {
     isLoading: null,
     errors: [],
     saveError: null,
+    validation: [],
     blocks: [],
     selectedBlock: null,
     selectedBlockId: null
@@ -54,6 +55,13 @@ export function blocksReducer(state = initialState, action: blocks.Actions): Blo
         case blocks.UPDATE: {
             return Object.assign({}, state, {
                 isLoading: true
+            });
+        }
+
+        case blocks.UPDATE_VALIDATION_ERROR: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                validation: action.validation
             });
         }
 

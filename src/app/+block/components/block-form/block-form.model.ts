@@ -3,6 +3,7 @@ export interface BlockFormModel {
     isLoading: boolean;
     hasErrored: boolean;
     hasSaveErrored: boolean;
+    validationMessages: string[];
 }
 
 export interface BlockModel {

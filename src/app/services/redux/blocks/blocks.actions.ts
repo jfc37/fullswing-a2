@@ -1,3 +1,4 @@
+import { Validation } from '../common/validation.model';
 import { Block } from './blocks.model';
 import { Action } from '@ngrx/store';
 
@@ -11,6 +12,7 @@ export const LOAD_SELECTED_FAILED = '[Blocks] Load Selected Failed';
 
 export const UPDATE = '[Blocks] Update';
 export const UPDATE_SUCCEDED = '[Blocks] Update Succeded';
+export const UPDATE_VALIDATION_ERROR = '[Blocks] Update Validation Error';
 export const UPDATE_FAILED = '[Blocks] Update Failed';
 
 export class LoadBlocks implements Action {
@@ -59,6 +61,12 @@ export class UpdateBlockSucceded implements Action {
     constructor(public block: Block) {}
 }
 
+export class UpdateBlockValidationError implements Action {
+    public readonly type = UPDATE_VALIDATION_ERROR;
+
+    constructor(public validation: Validation[]) {}
+}
+
 export class UpdateBlockFailed implements Action {
     public readonly type = UPDATE_FAILED;
 
@@ -74,4 +82,5 @@ export type Actions
     | LoadSelectedBlockFailed
     | UpdateBlock
     | UpdateBlockSucceded
+    | UpdateBlockValidationError
     | UpdateBlockFailed;

@@ -59,13 +59,15 @@ export class BlockDetailsSelector {
         const isLoading$ = this._store.select(blocks.getLoading);
         const hasErrored$ = this._store.select(blocks.getHasErrored);
         const hasSaveErrored$ = this._store.select(blocks.getHasSaveErrored);
+        const validation$ = this._store.select(blocks.getValidation);
         const selectedBlock$ = this._store.select(blocks.getSelectedBlock);
 
-        return Observable.combineLatest(isLoading$, hasErrored$, hasSaveErrored$, selectedBlock$)
-            .map(([isLoading, hasErrored, hasSaveErrored, selectedBlock]) => ({
+        return Observable.combineLatest(isLoading$, hasErrored$, hasSaveErrored$, validation$, selectedBlock$)
+            .map(([isLoading, hasErrored, hasSaveErrored, validation, selectedBlock]) => ({
                 isLoading,
                 hasErrored,
                 hasSaveErrored,
+                validationMessages: validation.map(v => v.message),
                 block: selectedBlock ? {
                     name: selectedBlock.name,
                     startDate: selectedBlock.startDate,
