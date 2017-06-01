@@ -12,6 +12,9 @@ export const getLoading =
 export const getHasErrored =
     createSelector(getBlocksState, (blocks: BlocksState) => blocks.errors.length > 0);
 
+export const getHasSaveErrored =
+    createSelector(getBlocksState, (blocks: BlocksState) => !!blocks.saveError);
+
 export const getBlocks =
     createSelector(getBlocksState, (blocks: BlocksState) => blocks.blocks);
 

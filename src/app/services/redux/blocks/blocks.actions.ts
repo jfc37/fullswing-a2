@@ -9,6 +9,10 @@ export const LOAD_SELECTED = '[Blocks] Load Selected';
 export const LOAD_SELECTED_SUCCEDED = '[Blocks] Load Selected Succeded';
 export const LOAD_SELECTED_FAILED = '[Blocks] Load Selected Failed';
 
+export const UPDATE = '[Blocks] Update';
+export const UPDATE_SUCCEDED = '[Blocks] Update Succeded';
+export const UPDATE_FAILED = '[Blocks] Update Failed';
+
 export class LoadBlocks implements Action {
     public readonly type = LOAD;
 }
@@ -43,10 +47,31 @@ export class LoadSelectedBlockFailed implements Action {
     constructor(public error: Error) {}
 }
 
+export class UpdateBlock implements Action {
+    public readonly type = UPDATE;
+
+    constructor(public block: Block) {}
+}
+
+export class UpdateBlockSucceded implements Action {
+    public readonly type = UPDATE_SUCCEDED;
+
+    constructor(public block: Block) {}
+}
+
+export class UpdateBlockFailed implements Action {
+    public readonly type = UPDATE_FAILED;
+
+    constructor(public error: Error) {}
+}
+
 export type Actions
     = LoadBlocks
     | LoadBlocksSucceded
     | LoadBlocksFailed
     | LoadSelectedBlock
     | LoadSelectedBlockSucceded
-    | LoadSelectedBlockFailed;
+    | LoadSelectedBlockFailed
+    | UpdateBlock
+    | UpdateBlockSucceded
+    | UpdateBlockFailed;

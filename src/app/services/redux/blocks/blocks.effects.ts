@@ -1,6 +1,6 @@
 import { dtosToClasses } from '../classes/classes.model';
 import { BlockRepository } from '../../apis/repositories/block.repository';
-import { dtosToBlocks, dtoToBlock } from './blocks.model';
+import { dtosToBlocks, dtoToBlock, blockToDto } from './blocks.model';
 import * as blockActions from './blocks.actions';
 import * as teacherActions from '../teachers/teachers.actions';
 import * as classActions from '../classes/classes.actions';
@@ -42,6 +42,16 @@ export class BlocksEffects {
             .catch(response => response.status === 404
                    ? Observable.of(new blockActions.LoadBlocksFailed(new Error(`Could not find selected block`))) as Observable<Action>
                    : Observable.of(new blockActions.LoadBlocksFailed(response)) as Observable<Action>
+            )
+        );
+
+    @Effect()
+    public update$: Observable<Action> = this._actions$
+        .ofType(blockActions.UPDATE)
+        .map(action => blockToDto(action.block))
+        .switchMap(block => this._repository.update(block)
+            .map(updatedBlock => new blockActions.LoadSelectedBlock(updatedBlock.id))
+            .catch(response => Observable.of(new blockActions.UpdateBlockFailed(response))
             )
         );
 

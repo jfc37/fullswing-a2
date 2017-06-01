@@ -22,4 +22,9 @@ export class BlockRepository {
         return this._http.get(`https://api-speedydonkey.azurewebsites.net/api/blocks/${id}`)
             .map(response => response.json());
     }
+
+    public update(block: BlockDto): Observable<BlockDto> {
+        return this._http.put(`https://api-speedydonkey.azurewebsites.net/api/blocks/${block.id}`, block)
+            .map(response => response.json());
+    }
 }

@@ -1,10 +1,11 @@
+import { BlockFormComponent } from './components/block-form/block-form.component';
 import { BlockSummaryComponent } from './components/block-summary/block-summary.component';
 import { BlockDetailsComponent } from './container/block-details/block-details.component';
 import { BlockTableComponent } from './components/block-table/block-table.component';
 import { BlockListComponent } from './container/block-list/block-list.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -22,11 +23,12 @@ console.log('`Block` bundle loaded asynchronously');
 
     BlockDetailsComponent,
     BlockSummaryComponent,
-    ClassListComponent
+    ClassListComponent,
+    BlockFormComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
-    FormsModule,
     PipesModule,
     RouterModule.forChild(routes),
   ],

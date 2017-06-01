@@ -4,6 +4,7 @@ import * as blocks from './blocks.actions';
 export const initialState: BlocksState = {
     isLoading: null,
     errors: [],
+    saveError: null,
     blocks: [],
     selectedBlock: null,
     selectedBlockId: null
@@ -48,6 +49,19 @@ export function blocksReducer(state = initialState, action: blocks.Actions): Blo
                 selectedBlock: action.block
             });
 
+        }
+
+        case blocks.UPDATE: {
+            return Object.assign({}, state, {
+                isLoading: true
+            });
+        }
+
+        case blocks.UPDATE_FAILED: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                saveError: action.error
+            });
         }
 
         default: {

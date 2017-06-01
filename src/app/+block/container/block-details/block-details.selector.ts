@@ -1,3 +1,4 @@
+import { BlockFormModel } from '../../components/block-form/block-form.model';
 import { ClassListModel } from '../../components/class-list/class-list.model';
 import { BlockSummaryModel } from '../../components/block-summary/block-summary.model';
 import * as blocks from '../../../services/redux/blocks/blocks.selectors';
@@ -51,6 +52,30 @@ export class BlockDetailsSelector {
             : {
                 isLoading,
                 hasErrored
+            }));
+    }
+
+    public getBlockFormModel(): Observable<BlockFormModel> {
+        const isLoading$ = this._store.select(blocks.getLoading);
+        const hasErrored$ = this._store.select(blocks.getHasErrored);
+        const hasSaveErrored$ = this._store.select(blocks.getHasSaveErrored);
+        const selectedBlock$ = this._store.select(blocks.getSelectedBlock);
+
+        return Observable.combineLatest(isLoading$, hasErrored$, hasSaveErrored$, selectedBlock$)
+            .map(([isLoading, hasErrored, hasSaveErrored, selectedBlock]) => ({
+                isLoading,
+                hasErrored,
+                hasSaveErrored,
+                block: selectedBlock ? {
+                    name: selectedBlock.name,
+                    startDate: selectedBlock.startDate,
+                    endDate: selectedBlock.endDate,
+                    isInviteOnly: selectedBlock.isInviteOnly,
+                    minutesPerClass: selectedBlock.minutesPerClass,
+                    numberOfClasses: selectedBlock.numberOfClasses,
+                    classCapacity: selectedBlock.classCapacity,
+                    teachers: selectedBlock.teachers
+                } : undefined
             }));
     }
 
