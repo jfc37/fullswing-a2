@@ -56,27 +56,28 @@ export class BlockDetailsSelector {
     }
 
     public getBlockFormModel(): Observable<BlockFormModel> {
-        const isLoading$ = this._store.select(blocks.getLoading);
-        const hasErrored$ = this._store.select(blocks.getHasErrored);
-        const hasSaveErrored$ = this._store.select(blocks.getHasSaveErrored);
-        const validation$ = this._store.select(blocks.getValidation);
-        const selectedBlock$ = this._store.select(blocks.getSelectedBlock);
+        const blockState$ = this._store.select(blocks.getBlocksState);
+        const teachersState$ = this._store.select(teachers.getTeachersState);
 
-        return Observable.combineLatest(isLoading$, hasErrored$, hasSaveErrored$, validation$, selectedBlock$)
-            .map(([isLoading, hasErrored, hasSaveErrored, validation, selectedBlock]) => ({
-                isLoading,
-                hasErrored,
-                hasSaveErrored,
-                validationMessages: validation.map(v => v.message),
-                block: selectedBlock ? {
-                    name: selectedBlock.name,
-                    startDate: selectedBlock.startDate,
-                    endDate: selectedBlock.endDate,
-                    isInviteOnly: selectedBlock.isInviteOnly,
-                    minutesPerClass: selectedBlock.minutesPerClass,
-                    numberOfClasses: selectedBlock.numberOfClasses,
-                    classCapacity: selectedBlock.classCapacity,
-                    teachers: selectedBlock.teachers
+        return Observable.combineLatest(blockState$, teachersState$)
+            .map(([blockState, teachersState]) => ({
+                isLoading: blockState.isLoading || teachersState.isLoading,
+                hasErrored: [...blockState.errors, ...teachersState.errors].length > 0,
+                hasSaveErrored: !!blockState.saveError,
+                validationMessages: blockState.validation.map(v => v.message),
+                teachers: teachersState.teachers.map(teacher => ({
+                    name: teacher.fullName,
+                    id: teacher.id
+                })),
+                block: blockState.selectedBlock ? {
+                    name: blockState.selectedBlock.name,
+                    startDate: blockState.selectedBlock.startDate,
+                    endDate: blockState.selectedBlock.endDate,
+                    isInviteOnly: blockState.selectedBlock.isInviteOnly,
+                    minutesPerClass: blockState.selectedBlock.minutesPerClass,
+                    numberOfClasses: blockState.selectedBlock.numberOfClasses,
+                    classCapacity: blockState.selectedBlock.classCapacity,
+                    teacher: blockState.selectedBlock.teachers[0]
                 } : undefined
             }));
     }

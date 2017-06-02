@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     selector: 'fs-block-form',
     template: `
         <h4>BLOCK FORM</h4>
-        <pre>{{model | json}}</pre>
         <div *ngIf="model.isLoading">Loading...</div>
         <div *ngIf="model.hasErrored">Oops, block failed to load</div>
         <div *ngIf="model.hasSaveErrored">Oops, an error occurred while saving block</div>
@@ -39,6 +38,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
                             type="checkbox"
                            formControlName="isInviteOnly">
                 </label>
+                <label class="center-block">Teacher:
+                    <select formControlName="teacher">
+                        <option *ngFor="let teacher of model.teachers"
+                                [value]="teacher.id">{{teacher.name}}</option>
+                    </select>
+                </label>
 
                 <button>Save</button>
             </form>
@@ -63,6 +68,7 @@ export class BlockFormComponent implements OnInit, OnChanges {
             numberOfClasses: [],
             classCapacity: [],
             isInviteOnly: [],
+            teacher: []
         });
     }
 

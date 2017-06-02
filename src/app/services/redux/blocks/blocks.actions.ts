@@ -58,7 +58,7 @@ export class UpdateBlock implements Action {
 export class UpdateBlockSucceded implements Action {
     public readonly type = UPDATE_SUCCEDED;
 
-    constructor(public block: Block) {}
+    constructor(public id: number) {}
 }
 
 export class UpdateBlockValidationError implements Action {

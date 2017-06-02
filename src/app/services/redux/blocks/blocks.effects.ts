@@ -51,11 +51,16 @@ export class BlocksEffects {
         .ofType(blockActions.UPDATE)
         .map(action => blockToDto(action.block))
         .switchMap(block => this._repository.update(block)
-            .map(updatedBlock => new blockActions.LoadSelectedBlock(updatedBlock.id))
+            .map(updatedBlock => new blockActions.UpdateBlockSucceded(block.id))
             .catch(response => response.status === 400
                 ? Observable.of(new blockActions.UpdateBlockValidationError(dtoToValidation(response.json()))) as Observable<Action>
                 : Observable.of(new blockActions.UpdateBlockFailed(response)) as Observable<Action>)
         );
+
+    @Effect()
+    public updateSucceded$: Observable<Action> = this._actions$
+        .ofType(blockActions.UPDATE_SUCCEDED)
+        .map((action: blockActions.UpdateBlockSucceded) => new blockActions.LoadSelectedBlock(action.id));
 
     constructor(
         private _actions$: Actions,

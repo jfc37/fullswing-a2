@@ -60,6 +60,6 @@ export function blockToDto(block: Block): BlockDto {
         endDate: block.endDate,
         isInviteOnly: block.isInviteOnly,
         minutesPerClass: block.minutesPerClass,
-        teachers: []
+        teachers: block.teachers.map(id => ({id} as TeacherDto))
     };
 }

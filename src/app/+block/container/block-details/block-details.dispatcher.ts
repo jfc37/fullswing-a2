@@ -1,3 +1,4 @@
+import { LoadTeachers } from '../../../services/redux/teachers/teachers.actions';
 import { Block } from '../../../services/redux/blocks/blocks.model';
 import { BlockModel } from '../../components/block-form/block-form.model';
 import { LoadClassesForBlock } from '../../../services/redux/classes/classes.actions';
@@ -14,6 +15,7 @@ export class BlockDetailsDispatcher {
     public initialise(id: number): void {
         this._store.dispatch(new blockActions.LoadSelectedBlock(id));
         this._store.dispatch(new LoadClassesForBlock(id));
+        this._store.dispatch(new LoadTeachers());
     }
 
     public update(blockModel: BlockModel, id: number): void {
@@ -31,7 +33,7 @@ export class BlockDetailsDispatcher {
             minutesPerClass: model.minutesPerClass,
             numberOfClasses: model.numberOfClasses,
             classCapacity: model.classCapacity,
-            teachers: model.teachers
+            teachers: [model.teacher]
         };
     }
 }

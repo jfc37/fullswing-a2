@@ -1,5 +1,6 @@
 export interface BlockFormModel {
     block: BlockModel;
+    teachers: TeacherOption[];
     isLoading: boolean;
     hasErrored: boolean;
     hasSaveErrored: boolean;
@@ -13,6 +14,11 @@ export interface BlockModel {
     minutesPerClass: number;
     classCapacity: number;
     numberOfClasses: number;
-    teachers: number[];
+    teacher: number;
     isInviteOnly: boolean;
+}
+
+export interface TeacherOption {
+    name: string;
+    id: number;
 }

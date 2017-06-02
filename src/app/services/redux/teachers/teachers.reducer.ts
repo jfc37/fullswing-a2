@@ -10,6 +10,29 @@ export const initialState: TeachersState = {
 
 export function teachersReducer(state = initialState, action: teachers.Actions): TeachersState {
     switch (action.type) {
+        case teachers.LOAD: {
+            return Object.assign({}, state, {
+                isLoading: true
+            });
+        }
+
+        case teachers.LOAD_SUCCEDED: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                errors: []
+            });
+        }
+
+        case teachers.LOAD_FAILED: {
+            return Object.assign({}, state, {
+                isLoading: false,
+                errors: [
+                    ...state.errors,
+                    action.error
+                ]
+            });
+        }
+
         case teachers.ADD_TEACHERS: {
             return Object.assign({}, state, {
                 teachers: [

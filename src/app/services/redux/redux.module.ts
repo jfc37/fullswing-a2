@@ -11,6 +11,7 @@ import { UpcomingScheduleEffects } from './upcoming-schedule/upcoming-schedule.e
 import { CurrentPassesEffects } from './current-passes/current-passes.effects';
 import { BlocksForEnrolmentsEffects } from './blocks-for-enrolment/blocks-for-enrolment.effects';
 import { BlocksEffects } from './blocks/blocks.effects';
+import { TeachersEffects } from './teachers/teachers.effects';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { BlocksEffects } from './blocks/blocks.effects';
         EffectsModule.run(BlocksForEnrolmentsEffects),
         EffectsModule.run(BlocksEffects),
         EffectsModule.run(ClassesEffects),
+        EffectsModule.run(TeachersEffects),
     ]
 })
 export class ReduxModule { }
