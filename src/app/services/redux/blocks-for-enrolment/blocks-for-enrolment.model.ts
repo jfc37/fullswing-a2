@@ -1,4 +1,4 @@
-import { BlockDto } from '../../apis/dtos';
+import { BlockEnrolmentDto } from '../../apis/dtos';
 
 export interface BlocksForEnrolmentState {
     isLoading: boolean;
@@ -19,11 +19,11 @@ export interface BlockForEnrolment {
     hasErrored: boolean;
 }
 
-export function mapFromDtos(dtos: BlockDto[]): BlockForEnrolment[] {
+export function mapFromDtos(dtos: BlockEnrolmentDto[]): BlockForEnrolment[] {
     return dtos.map(mapFromDto);
 }
 
-function mapFromDto(dto: BlockDto): BlockForEnrolment {
+function mapFromDto(dto: BlockEnrolmentDto): BlockForEnrolment {
     return {
         id: dto.id,
         isEnroled: dto.isAlreadyRegistered,

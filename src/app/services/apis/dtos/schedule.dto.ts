@@ -1,8 +1,8 @@
-import { TeacherDto, BlockDto } from './';
+import { TeacherDto, BlockEnrolmentDto } from './';
 
 export interface ScheduledClassDto {
     actualStudents: any[];
-    block: BlockDto;
+    block: BlockEnrolmentDto;
     classCapacity: number;
     endTime: Date;
     id: number;

@@ -1,3 +1,6 @@
+import { classesReducer } from '../classes/classes.reducer';
+import { teachersReducer } from '../teachers/teachers.reducer';
+import { blocksReducer } from '../blocks/blocks.reducer';
 import { blocksForEnrolmentReducer } from '../blocks-for-enrolment/blocks-for-enrolment.reducer';
 import { currentPassesReducer } from '../current-passes/current-passes.reducer';
 import { upcomingScheduleReducer } from '../upcoming-schedule/upcoming-schedule.reducer';
@@ -13,7 +16,10 @@ const appReducers = {
     user: userReducer,
     upcomingSchedule: upcomingScheduleReducer,
     currentPasses: currentPassesReducer,
-    blocksForEnrolment: blocksForEnrolmentReducer
+    blocksForEnrolment: blocksForEnrolmentReducer,
+    blocks: blocksReducer,
+    teachers: teachersReducer,
+    classes: classesReducer
 };
 
 const developmentReducer: ActionReducer<AppState> = compose(storeFreeze, combineReducers)(appReducers);

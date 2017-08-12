@@ -14,6 +14,11 @@ export const ROUTES: Routes = [
     canActivate: [ LoggedInGuard ],
     loadChildren: './+block-enrolment#BlockEnrolmentModule'
   },
+  {
+    path: 'blocks',
+    canActivate: [ LoggedInGuard ],
+    loadChildren: './+block#BlockModule'
+  },
   { path: 'login', loadChildren: './+login#LoginModule'},
   { path: '**',    component: NoContentComponent },
 ];

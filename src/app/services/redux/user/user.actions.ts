@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 
 export const CHECK_LOGIN_STATUS = '[User] Check Login Status';
 export const LOGGED_IN = '[User] Logged In';
+export const SET_ID_TOKEN = '[User] Set Id Token';
 export const SET_PROFILE = '[User] Set Profile';
 export const LOAD_PROFILE_FAILED = '[User] Load Profile Failed';
 export const LOGGED_OUT = '[User] Logged Out';
@@ -14,7 +15,13 @@ export class CheckLoginStatusAction implements Action {
 export class LoggedInAction implements Action {
     public readonly type = LOGGED_IN;
 
-    constructor(public payload: {idToken: string}) {
+    constructor(public idToken: string) {}
+}
+
+export class SetIdTokenAction implements Action {
+    public readonly type = SET_ID_TOKEN;
+
+    constructor(public idToken: string) {
 
     }
 }
@@ -42,6 +49,7 @@ export class LoggedOutAction implements Action {
 export type Actions
     = CheckLoginStatusAction
     | LoggedInAction
+    | SetIdTokenAction
     | SetProfileAction
     | LoadProfileFailedAction
     | LoggedOutAction;

@@ -1,0 +1,21 @@
+<nav>
+  <a [routerLink]=" ['./dashboard'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Dashboard
+  </a>
+  <a [routerLink]=" ['./block-enrolment'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Block Enrolment
+  </a>
+  <a [routerLink]=" ['./blocks'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Blocks
+  </a>
+  <a (click)="logout()">
+    Log out
+  </a>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

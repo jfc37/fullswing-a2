@@ -3,7 +3,7 @@ import { BlockGroupModel } from '../components/block-group/block-group.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
-import moment from 'moment';
+import * as moment from 'moment';
 import { BlockEnrolmentSelector } from './block-enrolment.selector';
 
 /**

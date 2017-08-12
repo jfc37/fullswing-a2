@@ -3,7 +3,6 @@ import {
     expectElementExists,
     expectNumberOfElementExists
 } from '../../../common/unit-test/elements.spec';
-import { UpcomingClassModel, UpcomingSchduleModel } from './upcoming-schedule.model';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';

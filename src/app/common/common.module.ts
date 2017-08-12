@@ -1,11 +1,11 @@
-import { LockService } from './authentication/lock.service';
-import { LoggedInGuard } from './';
+import * as auth from './';
 import { NgModule } from '@angular/core';
 
 @NgModule({
   providers: [
-      LoggedInGuard,
-      LockService
+      auth.NumberIdGuard,
+      auth.LoggedInGuard,
+      auth.LockService
   ]
 })
 export class CommonModule {

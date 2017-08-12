@@ -4,11 +4,12 @@ import {
     LoadProfileFailedAction,
     LoggedInAction,
     LoggedOutAction,
+    SetIdTokenAction,
     SetProfileAction
 } from './user.actions';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
+import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
@@ -26,7 +27,7 @@ export class UserEffects {
             const idToken = localStorage.getItem('id_token');
             const hasValidIdToken = idToken && tokenNotExpired(null, idToken);
             if (hasValidIdToken) {
-              return new LoggedInAction({idToken});
+              return new SetIdTokenAction(idToken);
             } else {
               return new LoggedOutAction();
             }
@@ -35,15 +36,20 @@ export class UserEffects {
     @Effect()
     public loggedIn$: Observable<Action> = this.actions$
         .ofType(user.LOGGED_IN)
-        .map(action => action.payload)
-        .do(payload => {
-            localStorage.setItem('id_token', payload.idToken);
-            this._router.navigate(['/block-enrolment']);
-        })
-        .switchMap(payload => this._lock.getProfile(payload.idToken))
+        .map((action: user.LoggedInAction) => action.idToken)
+        .do(() => this._router.navigate(['/dashboard']))
+        .map(idToken => new SetIdTokenAction(idToken));
+
+    @Effect()
+    public setIdToken$: Observable<Action> = this.actions$
+        .ofType(user.SET_ID_TOKEN)
+        .map((action: user.SetIdTokenAction) => action.idToken)
+        .do(idToken => localStorage.setItem('id_token', idToken))
+        .switchMap(idToken => this._lock.getProfile(idToken))
         .map(payload => ({
             name: payload.nickname || payload.name || payload.email,
-            role: payload.claims[0].resource}))
+            role: payload.claims[0].resource
+        }))
         .map(payload => new SetProfileAction(payload))
         .catch(error => Observable.of(new LoadProfileFailedAction(error)));
 

@@ -18,7 +18,7 @@ export class DashboardSelector {
                 this._store.select(upcomingSchedule.getUpcomingClasses))
             .map(([isLoading, hasErrored, classes]) => ({
                 isLoading,
-                hasErrored,
+                hasErrored,    
                 upcomingClasses: classes.map(c => ({
                     name: c.name,
                     startTime: c.startTime

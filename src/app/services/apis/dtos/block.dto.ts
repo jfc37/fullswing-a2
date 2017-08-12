@@ -1,19 +1,18 @@
-import { TeacherDto } from './';
+import { ClassDto } from './class.dto';
+import { TeacherDto } from './teacher.dto';
 
 export interface BlockDto {
-    announcements: string;
+    announcements?: any;
     classCapacity: number;
-    classes: any[];
+    classes?: ClassDto[];
     endDate: Date;
-    enroledStudents: any;
+    enroledStudents?: any[];
     id: number;
-    isAlreadyRegistered: boolean;
     isInviteOnly: boolean;
     minutesPerClass: number;
     name: string;
     numberOfClasses: number;
-    room: any;
-    spacesAvailable: number;
+    room?: any;
     startDate: Date;
     teachers: TeacherDto[];
 }

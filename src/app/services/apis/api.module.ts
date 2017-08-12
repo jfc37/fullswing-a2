@@ -10,6 +10,8 @@ import { HttpDecorator } from './http-decorator';
         repositories.ScheduleRepository,
         repositories.BlockRepository,
         repositories.EnrolmentRepository,
+        repositories.ClassRepository,
+        repositories.TeacherRepository,
     ],
 })
 export class ApiModule { }
